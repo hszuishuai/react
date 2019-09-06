@@ -4,8 +4,6 @@ import './index.css';
 import 'antd/dist/antd.css'
 //import App from './App';
 //import Home from './component/Home'
-import { ConfigProvider  } from 'antd'
-import zhCN from 'antd/lib/locale-provider/zh_CN'
 import {Provider}from "react-redux"
 import store from "./redux"
 //import {BrowserRouter as Router ,Route,Link} from 'react-router-dom'

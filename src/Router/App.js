@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch, NavLink } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom"
 import Loadable from "react-loadable"
 import Lading from "../component/loading.js"
-
+import AuthRouter from "../component/AuthRouter"
+import Login from "../component/Login"
 const routeList = [
     {
         component: () => import("../component/Home"),
@@ -15,18 +16,19 @@ const routeList = [
     {
         component: () => import("../App"),
         path: "/app"
-    }
+    },
 ]
 
 export class App extends Component {
     render() {
         return (
             <Router>
-                <NavLink to="/app">前往首页页面</NavLink>
-                <NavLink to="/home">前往home页面</NavLink>
+                {/* <NavLink to="/app">前往首页页面</NavLink>
+                <NavLink to="/home">前往home页面</NavLink> */}
                 <Switch>
+                    <Route path="/login" exact component={Login} ></Route>
                     {routeList.map(item => (
-                        <Route
+                        <AuthRouter
                             key={item.path}
                             exact={true}
                             path={item.path}
