@@ -6,7 +6,7 @@ class AuthRouter extends Component {
     render() {
         const { userinfo, component: Component, ...rest } = this.props
         console.log(userinfo)
-        const isLogged = userinfo!==null ? true : false;
+        const isLogged = userinfo!==""? true : false;
         console.log(isLogged)
 
         return (

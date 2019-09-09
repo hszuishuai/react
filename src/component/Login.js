@@ -1,18 +1,26 @@
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import {connect} from "react-redux"
-import {asyncUseinfo} from "../redux/actions"
+import { connect } from "react-redux"
+import { asyncUseinfo } from "../redux/actions"
 class LoginForm extends Component {
+
+    componentWillReceiveProps(nextProps) {
+        //console.log(nextProps) 
+        //saga 异步请求登录 改变props 重新渲染页面 跳转路由
+        let { userinfo } = nextProps
+        if (userinfo !== "") {
+            this.props.history.push({
+                pathname: "/app"
+            })
+        }
+    }
     handleSubmit = e => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        const { userinfo, login } = this.props
+        this.props.form.validateFields(async (err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                this.props.login(values);
-                this.props.history.push({
-                    pathname:"/app"
-                })
-                
+                login(values)
             }
         });
     };
@@ -57,11 +65,11 @@ class LoginForm extends Component {
         )
     }
 }
-const mapStateToProps = (state)=>({
-    userinfo:state.userinfo
+const mapStateToProps = (state) => ({
+    userinfo: state.userinfo
 })
-const mapDispatchToProps = (dispatch) =>({
-    login:(params)=>dispatch(asyncUseinfo(params))
+const mapDispatchToProps = (dispatch) => ({
+    login: (params) => dispatch(asyncUseinfo(params))
 })
 
 const storeLoginForm = connect(
@@ -69,4 +77,4 @@ const storeLoginForm = connect(
     mapDispatchToProps,
 )(LoginForm)
 
-export default  Form.create({name: 'login-form' })(storeLoginForm);
+export default Form.create({ name: 'login-form' })(storeLoginForm);
