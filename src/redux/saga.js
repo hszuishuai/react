@@ -4,13 +4,8 @@ import {
     ASYNC_CHNAGE_COUTER,
     ASYNC_SET_USERINFO
 } from './actionTypes'
-import {
-    login
-} from "../api"
-import {
-    changeCount,
-    getUseinfo
-} from './actions'
+import {login} from "../api"
+import {changeCount,getUseinfo } from './actions'
 
 const delay = ms => new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -24,9 +19,11 @@ function* delayChangeCount() {
 }
 function* apiGetUseinfo(action) {
     try {
-        const res = yield call(login, action.params);
+       // console.log(action.getUseinfo)
+        yield call(delay, 2000);
+        const res = yield call(login, action.userinfo);
         yield put(getUseinfo(res.data))
-        console.log(res)
+        console.log(getUseinfo(res.data))
     } catch {
         return
     }

@@ -18,11 +18,15 @@ code {
 }
 
 .example {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
   text-align: center;
   background: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   margin-bottom: 20px;
-  width: 100vw;
-  height: 100vh;
   margin: 20px 0;
+  z-index: 20;
 }

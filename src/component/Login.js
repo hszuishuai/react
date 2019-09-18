@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox} from 'antd';
 import { connect } from "react-redux"
 import { asyncUseinfo } from "../redux/actions"
+//import Loading from "./loading"
 class LoginForm extends Component {
 
     componentWillReceiveProps(nextProps) {
@@ -16,11 +17,11 @@ class LoginForm extends Component {
     }
     handleSubmit = e => {
         e.preventDefault();
-        const { userinfo, login } = this.props
+        const { login } = this.props
         this.props.form.validateFields(async (err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                login(values)
+                login(values)  
             }
         });
     };
@@ -28,6 +29,7 @@ class LoginForm extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <div>
+                {/* <Loading/> */}
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <Form.Item>
                         {getFieldDecorator('username', {
@@ -55,7 +57,6 @@ class LoginForm extends Component {
                             valuePropName: 'checked',
                             initialValue: true,
                         })(<Checkbox>Remember me</Checkbox>)}
-                        <a className="login-form-forgot" href=""> Forgot passwor </a>
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Log in
                         </Button>

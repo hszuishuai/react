@@ -5,30 +5,15 @@ import {
     ASYNC_SET_USERINFO
 } from './actionTypes'
 
+import { createAction } from "redux-actions"
+ 
+const changeCount = createAction(CHANEGE_COUTER);
 
-const changeCount = (count) => {
-    return {
-        type: CHANEGE_COUTER,
-        payload: count
-    }
-}
-const asyncCount = (count) => {
-    return {
-        type: ASYNC_CHNAGE_COUTER
-    }
-}
-const getUseinfo = (userinfo) => {
-    return {
-        type: SET_USERINFO,
-        userinfo
-    }
-}
-const asyncUseinfo = (userinfo) => {
-    return {
-        type: ASYNC_SET_USERINFO,
-        userinfo
-    }
-}
+const asyncCount =  createAction(ASYNC_CHNAGE_COUTER);
+
+const getUseinfo =  createAction(SET_USERINFO,userinfo=>userinfo)
+
+const asyncUseinfo = createAction(ASYNC_SET_USERINFO, userinfo=>userinfo);
 
 export {
     changeCount,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import Loadable from "react-loadable"
 import Lading from "../component/loading.js"
 import AuthRouter from "../component/AuthRouter"

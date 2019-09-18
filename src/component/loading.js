@@ -2,7 +2,8 @@ import * as React from 'react'
 import {Spin} from "antd"
 const Loading = () => (
   <div className="example">
-    <Spin size="large" />
+    <Spin tip="Loading...">
+  </Spin>,
   </div>
 )
 

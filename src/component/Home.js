@@ -14,17 +14,13 @@ class Home extends Component {
         }, 2000)
         console.log(this.props.match)
     }
-    loginOut = () => {
-        console.log(1)
-    }
+   
     render() {
         let { onIncreaseClick, count, asyncClick } = this.props
-        let {loginOut} = this
         return (<div className="Home">
             <div className="home">home页面</div>
             <button onClick={onIncreaseClick.bind(this, 5)}>点击</button>
             <button onClick={asyncClick.bind(this)}>saga</button>
-            <button onClick={loginOut}>退出</button>
             <h1>{count}</h1>
         </div>)
     }
