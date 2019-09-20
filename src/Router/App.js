@@ -34,7 +34,8 @@ export class App extends Component {
                             path={item.path}
                             component={Loadable({
                                 loader: item.component,
-                                loading: Lading
+                                loading: Lading,
+                                timeout:5000
                             })}
                         />
                     ))}
