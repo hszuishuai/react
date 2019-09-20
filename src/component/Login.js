@@ -6,6 +6,7 @@ import { asyncUseinfo } from "../redux/actions"
 function LoginForm(props) {
     let { userinfo } = props;
 
+    //当userinfo 发生变化的时候才会执行effect中的方法
     useEffect(() => {
         console.log("加载了")
         if (userinfo !== "") {
@@ -16,7 +17,7 @@ function LoginForm(props) {
         return () => {
             console.log("消失了")
         };
-    })
+    },[userinfo])
 
     const handleSubmit = e => {
         e.preventDefault();
