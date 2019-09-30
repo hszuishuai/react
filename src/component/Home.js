@@ -13,14 +13,17 @@ function Home(props) {
     let { onIncreaseClick, count, asyncClick } = props
 
     useEffect(() => {
-        console.log(1)
+        setTimeout(()=>{
+            onIncreaseClick(2);
+            console.log("执行了")
+        },2000)
         return () => {
             console.log(5)
         }
-    })
+    },[onIncreaseClick])
     // componentDidMount() {
     //     setTimeout(() => {
-    //         this.props.onIncreaseClick(2)
+    //         
     //     }, 2000)
     //     console.log(this.props.match)
     // }

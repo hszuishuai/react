@@ -26,24 +26,4 @@ const Reducer = handleActions({
     }
 }, initState)
 
-// const Reducer = (state = initState, action) => {
-//     // let count = state.count;
-//     switch (action.type) {
-//         case CHANEGE_COUTER:
-//             return {
-//                 ...state,
-//                 count:state.count+action.payload
-//             }
-//         case SET_USERINFO:{
-//             saveUserinfo(action.userinfo) //将用户信息存入stoarge
-//             return {
-//                 ...state,
-//                 userinfo:action.userinfo
-//             }
-//         }           
-//         default:
-//             return state
-//     }
-// }
-
 export default Reducer

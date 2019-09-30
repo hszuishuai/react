@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Children(props) {
+    console.log("孩子执行了")
     return (
         <div>
             <h1>孩子组件</h1>
