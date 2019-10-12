@@ -1,30 +1,30 @@
 // import './App.css';
-import React, { useState, memo, useMemo, useCallback } from "react"
-import { connect } from "react-redux"
-import Children from "./component/Children"
-import { removeUserinfo } from "./lib/cache"
+import React, { useState, memo, useMemo, useCallback } from "react";
+import { connect } from "react-redux";
+import Children from "./component/Children";
+import { removeUserinfo } from "./lib/cache";
 
 //react-Hooks
 const MemoChildren = memo(Children);
-function App(props) {
+const App: React.SFC = (props) => {
 
   const [state, setState] = useState({
+    child: undefined,
     msg: "这是信息",
-    child: null,
   });
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
   const { msg, child } = state;
 
   //useCallback的使用--------------优化子组件的重复渲染
-  const getmsg = (msg) => {
+  const getmsg = (Msg: string) => {
     // setChild(childs)
-    setState({ ...state, msg: msg })
-    console.log(state)
-  }
-  const loginOut = () => {
+    setState({ ...state, msg: Msg });
+    console.log(state);
+  };
+  const loginOut = (): void => {
     removeUserinfo();
-    console.log(1)
-  }
+    console.log(1);
+  };
 
   return (
     <div className="App">
@@ -32,7 +32,7 @@ function App(props) {
       {/* <MemoChildren  news={msg} /> */}
       <MemoChildren
         news={useMemo(() => msg, [msg])}
-        setmsg={useCallback((msg) => getmsg(msg), [])}
+        setmsg={useCallback((Msg) => getmsg(Msg), [])}
       />
       <h1>{child}</h1>
       <p>{count}</p>
@@ -43,4 +43,4 @@ function App(props) {
 }
 
 
-export default connect()(App) 
+export default connect()(App);
