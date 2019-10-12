@@ -4,11 +4,16 @@ import { connect } from "react-redux";
 import Children from "./component/Children";
 import { removeUserinfo } from "./lib/cache";
 
+interface IState {
+  child: string | undefined;
+  msg: string;
+}
+
 //react-Hooks
 const MemoChildren = memo(Children);
 const App: React.SFC = (props) => {
 
-  const [state, setState] = useState({
+  const [state, setState] = useState<IState>({
     child: undefined,
     msg: "这是信息",
   });

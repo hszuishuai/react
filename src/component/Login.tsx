@@ -7,11 +7,16 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 
 //import Loading from "./loading"
 
+interface Idispatch {
+    login: (params: object) => void;
+}
+
+
 const mapStateToProps: any = (state: RootState) => ({
     userinfo: state.userinfo
 });
-const dispatchProps: any = {
-    login: (params: object) => asyncUseinfo(params)
+const dispatchProps: Idispatch = {
+    login: (params) => asyncUseinfo(params)
 };
 
 type Iprops = Readonly<{

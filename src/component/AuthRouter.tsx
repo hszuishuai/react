@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, ComponentProps } from "react";
 import { connect } from "react-redux";
 import { Route, Redirect, withRouter, RouteComponentProps } from "react-router-dom";
 
@@ -6,21 +6,23 @@ import { Route, Redirect, withRouter, RouteComponentProps } from "react-router-d
 //     userinfo: Userinfo;
 // }
 
-interface IProps {
-    [name: string]: any;
+export interface IProps extends RouteComponentProps {
+    component?: ComponentProps<any>;
+    key: string;
+    exact: boolean;
+    path: string;
 }
 
 
-const mapStateToProps: any = (state: any) => ({
+const mapStateToProps = (state: any) => ({
     userinfo: state.userinfo
 });
 
-// type Props = ReturnType<typeof mapStateToProps>;
-
+type Props = ReturnType<typeof mapStateToProps> & IProps;
 
 
 //react-Hooks
-function AuthRouter(props: IProps): JSX.Element {
+function AuthRouter(props: Props): JSX.Element {
     const { userinfo, component: COMPONT, ...rest } = props;
     console.log(userinfo);
     const isLogged: boolean = userinfo !== "" ? true : false;

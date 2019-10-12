@@ -28,7 +28,7 @@ class App extends Component {
                     <Route path="/login" exact component={Login} />
                     {
                         routeList.map(item => (
-                            <Route
+                            <AuthRouter
                                 key={item.path}
                                 exact={true}
                                 path={item.path}
