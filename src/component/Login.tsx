@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Form, Icon, Input, Button, Checkbox, message } from "antd";
 
 import { observer, inject } from "mobx-react";
-import { IUser } from "MobxStore";
+import { IUser, ILoginParams } from "MobxStore";
 import { RouteComponentProps } from "react-router";
 //import Loading from "./loading"
 
@@ -62,12 +62,13 @@ const LoginForm: React.SFC<Iprops & RouteComponentProps> = (props) => {
     const handleSubmit: any = (e: MouseEvent) => {
         e.preventDefault();
         console.log("Received values of form: ", props.form);
-        props.form.validateFields(async (err: string, values: object) => {
+        props.form.validateFields(async (err: string, values: any) => {
             //const { login } = props;
+            const isLoginUserinfo: ILoginParams = { username: values.username, password: values.password };
             //const Login: any = login;
             if (!err) {
                 console.log("Received values of form: ", values);
-                Login(values);
+                Login(isLoginUserinfo);
                 // message.loading("正在登入中", 2, Login(values));
             }
         });

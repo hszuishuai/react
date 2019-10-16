@@ -1,12 +1,16 @@
 import React, { ComponentProps } from "react";
-import { connect } from "react-redux";
 
-import { RootState } from "typesafe-actions";
+/**
+ *  @redux
+ */
+//import { connect } from "react-redux";
+//import { RootState } from "typesafe-actions";
+
 import { Route, Redirect, withRouter, RouteComponentProps } from "react-router-dom";
+import { inject, observer } from "mobx-react";
+import { IUser } from "MobxStore";
 
-// interface Props {
-//     userinfo: Userinfo;
-// }
+
 
 export interface IProps extends RouteComponentProps {
     component?: ComponentProps<any>;
@@ -15,8 +19,11 @@ export interface IProps extends RouteComponentProps {
     path: string;
 }
 
+/**
+ * @redux
+ */
 //定义state
-interface ImapState<T, U> {
+/*interface ImapState<T, U> {
     (state: T): U;
 }
 interface Istate {
@@ -27,12 +34,20 @@ const mapStateToProps: ImapState<RootState, Istate> = (state) => ({
 });
 
 type Props = ReturnType<typeof mapStateToProps> & IProps;
+*/
 
+interface IState {
+    user?: IUser;
+}
+
+type Props = IProps & IState;
 
 //react-Hooks
 function AuthRouter(props: Props): JSX.Element {
-    const { userinfo, component: COMPONT, ...rest } = props;
-    console.log(userinfo);
+    const { user, component: COMPONT, ...rest } = props;
+    //console.log(userinfo);
+    const { userinfo } = user as IUser;
+
     const isLogged: boolean = userinfo !== "" ? true : false;
     console.log(isLogged);
 
@@ -46,7 +61,16 @@ function AuthRouter(props: Props): JSX.Element {
 }
 
 
-// tslint:disable-next-line:typedef
-const storeAuthRouter = connect(mapStateToProps)(AuthRouter);
+/**
+ * @redux
+ */
 
+// tslint:disable-next-line:typedef
+//const storeAuthRouter = connect(mapStateToProps)(AuthRouter);
+
+/**
+ * @mobx
+ */
+// tslint:disable-next-line:typedef
+const storeAuthRouter = inject("user")(observer(AuthRouter));
 export default withRouter(storeAuthRouter);

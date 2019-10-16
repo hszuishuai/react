@@ -1,7 +1,7 @@
 import { saveUserinfo, getUserinfo } from "../lib/cache";
 import { observable, action, runInAction } from "mobx";
-import { login, ILoginParasm } from "../api";
-import { IUser } from "MobxStore";
+import { login } from "../api";
+import { IUser, ILoginParams } from "MobxStore";
 
 export interface IUserinfo {
     username?: string;
@@ -16,7 +16,7 @@ class User implements IUser {
     public isLoading: boolean = false;
 
     @action
-    public Login = async (params: ILoginParasm) => {
+    public Login = async (params: ILoginParams) => {
         try {
             const result: IUserinfo = await login(params);
 

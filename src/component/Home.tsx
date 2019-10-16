@@ -14,7 +14,7 @@ import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { IStore } from "MobxStore";
 
-import { withRouter } from "react-router-dom";
+//import { withRouter } from "react-router-dom";
 
 
 // react-Hooks  redux
@@ -89,4 +89,4 @@ const moduleHome: any = connect(
 
 // mobx
 const moduleHome: any = inject("store")(observer(Home));
-export default withRouter(moduleHome);
+export default moduleHome;

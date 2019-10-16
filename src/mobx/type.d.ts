@@ -10,13 +10,18 @@ declare module "MobxStore" {
 
     export type IUser = {
         userinfo: object | string;
-        Login: (parms: any) => void;
+        Login: (parms: ILoginParams) => void;
     };
 
     export type IRoot = {
         store: IStore;
         user: IUser
     };
+
+    export interface ILoginParams {
+        username: string;
+        password: string;
+    }
 }
 //export as namespace IStore;
 
