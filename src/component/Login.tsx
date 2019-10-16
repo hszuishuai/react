@@ -1,45 +1,57 @@
 import React, { useEffect } from "react";
 import { Form, Icon, Input, Button, Checkbox, message } from "antd";
+
+import { observer, inject } from "mobx-react";
+import { IUser } from "MobxStore";
+import { RouteComponentProps } from "react-router";
+//import Loading from "./loading"
+
+/**
+ *  @redux
+ */
+
+/*
 import { RootState } from "typesafe-actions";
 import { connect } from "react-redux";
 import { asyncUseinfo } from "../redux/actions";
-import { withRouter, RouteComponentProps } from "react-router-dom";
-
-//import Loading from "./loading"
 
 interface Idispatch {
-    login: (params: object) => void;
+   login: (params: object) => void;
 }
 
-
 const mapStateToProps: any = (state: RootState) => ({
-    userinfo: state.userinfo
+   userinfo: state.userinfo
 });
 const dispatchProps: Idispatch = {
-    login: (params) => asyncUseinfo(params)
+   login: (params) => asyncUseinfo(params)
 };
 
 type Iprops = Readonly<{
-    form: any;
+   form: any;
 }>;
 
+type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps & Iprops;
+React.SFC<Partial<Props>>
+*/
 
-type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps & Iprops & RouteComponentProps;
 
+type Iprops = Readonly<{
+    form: any;
+    user: IUser;
+}>;
 
-const LoginForm: React.SFC<Partial<Props>> = (props) => {
-    const { userinfo, login } = props;
-
+const LoginForm: React.SFC<Iprops & RouteComponentProps> = (props) => {
+    const { userinfo, Login } = props.user;
     //当userinfo 发生变化的时候才会执行effect中的方法 [userinfo],
     useEffect(
         () => {
-            console.log(props);
+            console.log(props.user);
             // const Prop: any = props;
             if (userinfo !== "") {
                 props.history.push({
                     pathname: "/app"
                 });
-                // message.success("登入成功", 1)
+                message.success("登入成功", 1);
             }
             return () => {
                 console.log("消失了");
@@ -55,8 +67,8 @@ const LoginForm: React.SFC<Partial<Props>> = (props) => {
             //const Login: any = login;
             if (!err) {
                 console.log("Received values of form: ", values);
-                login(values);
-                message.loading("正在登入中", 2, login(values));
+                Login(values);
+                // message.loading("正在登入中", 2, Login(values));
             }
         });
     };
@@ -104,11 +116,17 @@ const LoginForm: React.SFC<Partial<Props>> = (props) => {
 };
 
 
-
+/**
+ * @redux
+ */
+/*
 const storeLoginForm: any = connect(
     mapStateToProps,
     dispatchProps,
 )(LoginForm);
+*/
+
+const storeLoginForm: any = inject("user")(observer(LoginForm));
 const FromCompont: any = Form.create({ name: "login-form'" })(storeLoginForm);
 
-export default withRouter(FromCompont);
+export default FromCompont;

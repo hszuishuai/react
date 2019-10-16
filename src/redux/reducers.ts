@@ -17,6 +17,7 @@ const initState: IState = {
 };
 
 const Reducer: any = createReducer(initState).handleAction(setUseinfo, (state, action) => {
+    saveUserinfo(action.payload.userInfo); //将用户信息存入stoarge
     return { ...state, userinfo: action.payload.userInfo };
 }).handleAction([CHANEGE_COUTER], (state, action) => {
     console.log(state, action);

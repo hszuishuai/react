@@ -1,6 +1,6 @@
 import Storage from "good-storage";
 //import Cookies from "js-cookie";
-const Token = "access_token"
+const Token = "access_token";
 const UserInfo = "userinfo";
 //保存token
 function saveToken(token) {
@@ -29,8 +29,8 @@ function getUserinfo() {
 
 //删除Token
 function removeUserinfo() {
-     Storage.remove(UserInfo)
-     return null
+    Storage.remove(UserInfo)
+    return null
 }
 
 

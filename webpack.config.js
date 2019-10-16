@@ -81,6 +81,8 @@ module.exports = {
             '@component': path.resolve(__dirname, './src/component'),
             '@page': path.resolve(__dirname, './src/page'),
             '@utils': path.resolve(__dirname, './src/utils'),
+            '@api': path.resolve(__dirname, './src/api'),
+
         },
     },
     plugins: [

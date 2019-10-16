@@ -1,31 +1,52 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { RootState } from "typesafe-actions";
+//redux
+/*
+    import { connect } from "react-redux";
+    import { RootState } from "typesafe-actions";
+    import {
+        changeCount,
+        asynCount,
+    } from "../redux/actions";
+    import { changeCount } from "../redux/actions";
+*/
+
+//mobox
+import { observer, inject } from "mobx-react";
+import { IStore } from "MobxStore";
+
 import { withRouter } from "react-router-dom";
-import {
-    changeCount,
-    asynCount,
-} from "../redux/actions";
 
-// react-Hooks
-type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps;
 
-const mapStateToProps: any = (state: RootState) => ({
-    count: state.count
-});
-const dispatchProps: any = {
-    asyncClick: (num: number) => asynCount(num),
-    onIncreaseClick: (num: number) => changeCount(num),
-};
+// react-Hooks  redux
+/*
+    type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps;
+    const mapStateToProps: any = (state: RootState) => ({
+         count: state.count
+      });
+    const dispatchProps: any = {
+        asyncClick: (num: number) => asynCount(num),
+        onIncreaseClick: (num: number) => changeCount(num),
+    };
+*/
 
-function Home({ onIncreaseClick, asyncClick, count }: Props): JSX.Element {
-    //const { count } = props;
 
+//mobx
+interface Props {
+    store: IStore;
+}
+//redux
+//{ onIncreaseClick, asyncClick, count }: Props
+
+//mobx
+//props: Props
+function Home(props: Props): JSX.Element {
+    const { count, changCount, asynCount } = props.store;
+    // console.log(props.store.count);
     useEffect(
         () => {
             setTimeout(
                 (): void => {
-                    onIncreaseClick(2);
+                    // asynCount(2);
                 },
                 2000,
             );
@@ -33,7 +54,7 @@ function Home({ onIncreaseClick, asyncClick, count }: Props): JSX.Element {
                 console.log(5);
             };
         },
-        [onIncreaseClick]
+        //[onIncreaseClick]
     );
     // componentDidMount() {
     //     setTimeout(() => {
@@ -43,24 +64,29 @@ function Home({ onIncreaseClick, asyncClick, count }: Props): JSX.Element {
 
     return (<div className="Home">
         <div className="home">home页面</div>
-        <button onClick={() => onIncreaseClick(5)}>点击</button>
-        <button onClick={() => asyncClick(2)}>saga</button>
+        <button onClick={() => changCount(5)}>点击</button>
+        <button onClick={() => asynCount(2)}>saga</button>
         <h1>{count}</h1>
     </div>);
 }
 
 
+//redux
 
-
-// const mapDispatchToProps = (dispatch: any) => ({
-//     asyncClick: () => dispatch(asynCount(num)),
-//     onIncreaseClick: () => dispatch(changeCount())
-// });
-
+/*
+  const mapDispatchToProps = (dispatch: any) => ({
+    asyncClick: () => dispatch(asynCount(num)),
+    onIncreaseClick: () => dispatch(changeCount())
+});
 
 const moduleHome: any = connect(
     mapStateToProps,
     dispatchProps
 
 )(Home);
+
+*/
+
+// mobx
+const moduleHome: any = inject("store")(observer(Home));
 export default withRouter(moduleHome);

@@ -8,6 +8,13 @@ import {
 import { Userinfo } from "MyModel";
 import { createAction } from "typesafe-actions";
 
+// type CHANGECOUNT = typeof CHANEGE_COUTER;
+// export interface IChangeCount {
+//     type: string;
+//     paload: {
+//         count: number;
+//     };
+// }
 
 
 const changeCount = createAction(CHANEGE_COUTER, (actions) => {

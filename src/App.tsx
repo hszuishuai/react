@@ -1,6 +1,7 @@
 // import './App.css';
 import React, { useState, memo, useMemo, useCallback } from "react";
-import { connect } from "react-redux";
+//readux
+// import { connect } from "react-redux";
 import Children from "./component/Children";
 import { removeUserinfo } from "./lib/cache";
 
@@ -11,6 +12,7 @@ interface IState {
 
 //react-Hooks
 const MemoChildren = memo(Children);
+
 const App: React.SFC = (props) => {
 
   const [state, setState] = useState<IState>({
@@ -47,5 +49,8 @@ const App: React.SFC = (props) => {
   );
 }
 
+//redux
+// export default connect()(App);
 
-export default connect()(App);
+//mobx
+export default App;

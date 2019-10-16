@@ -1,11 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, ComponentProps } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Loadable from "react-loadable";
 import Lading from "../component/loading";
 import AuthRouter from "../component/AuthRouter";
 import Login from "../component/Login";
 
-const routeList = [
+interface IRouter {
+    component: ComponentProps<any>;
+    path: string;
+}
+
+const routeList: IRouter[] = [
     {
         component: () => import("../component/Home"),
         path: "/home"

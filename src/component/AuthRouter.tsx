@@ -1,5 +1,7 @@
-import React, { ReactNode, ComponentProps } from "react";
+import React, { ComponentProps } from "react";
 import { connect } from "react-redux";
+
+import { RootState } from "typesafe-actions";
 import { Route, Redirect, withRouter, RouteComponentProps } from "react-router-dom";
 
 // interface Props {
@@ -13,8 +15,10 @@ export interface IProps extends RouteComponentProps {
     path: string;
 }
 
-
-const mapStateToProps = (state: any) => ({
+interface Imapstate {
+    (state: RootState): any;
+}
+const mapStateToProps: Imapstate = (state) => ({
     userinfo: state.userinfo
 });
 
