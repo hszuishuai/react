@@ -15,10 +15,14 @@ export interface IProps extends RouteComponentProps {
     path: string;
 }
 
-interface Imapstate {
-    (state: RootState): any;
+//定义state
+interface ImapState<T, U> {
+    (state: T): U;
 }
-const mapStateToProps: Imapstate = (state) => ({
+interface Istate {
+    userinfo: object | string;
+}
+const mapStateToProps: ImapState<RootState, Istate> = (state) => ({
     userinfo: state.userinfo
 });
 
@@ -41,22 +45,6 @@ function AuthRouter(props: Props): JSX.Element {
     );
 }
 
-// class AuthRouter extends Component {
-//     render() {
-//         const { userinfo, component: Component, ...rest } = this.props
-//         console.log(userinfo)
-//         const isLogged = userinfo!==""? true : false;
-//         console.log(isLogged)
-
-//         return (
-//             <Route {...rest} render={props => {
-//                 return isLogged
-//                     ? <Component {...props} />
-//                     : <Redirect to="/login" />
-//             }} />
-//         )
-//     }
-// }
 
 // tslint:disable-next-line:typedef
 const storeAuthRouter = connect(mapStateToProps)(AuthRouter);

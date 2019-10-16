@@ -12,6 +12,7 @@ export interface IUserinfo {
 class User implements IUser {
     @observable
     public userinfo: IUserinfo = getUserinfo();
+    @observable
     public isLoading: boolean = false;
 
     @action
