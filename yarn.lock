@@ -1349,6 +1349,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/good-storage@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@types/good-storage/download/@types/good-storage-1.1.0.tgz#4d7d37918348e5b6e5e1060d692b84997e9a5a9f"
+  integrity sha1-TX03kYNI5bbl4QYNaSuEmX6aWp8=
+
 "@types/history@*":
   version "4.7.3"
   resolved "https://registry.npm.taobao.org/@types/history/download/@types/history-4.7.3.tgz#856c99cdc1551d22c22b18b5402719affec9839a"

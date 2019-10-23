@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-//redux
+/**
+ * @redux
+ */
 /*
     import { connect } from "react-redux";
     import { RootState } from "typesafe-actions";
@@ -10,14 +12,19 @@ import React, { useEffect } from "react";
     import { changeCount } from "../redux/actions";
 */
 
-//mobox
+/**
+ * @mobx
+ */
 import { observer, inject } from "mobx-react";
 import { IStore } from "MobxStore";
 
 //import { withRouter } from "react-router-dom";
 
 
-// react-Hooks  redux
+/**
+ * @reactHooks
+ * @redux
+ */
 /*
     type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps;
     const mapStateToProps: any = (state: RootState) => ({
@@ -30,7 +37,9 @@ import { IStore } from "MobxStore";
 */
 
 
-//mobx
+/**
+ * @mobx
+ */
 interface Props {
     store: IStore;
 }
@@ -71,8 +80,9 @@ function Home(props: Props): JSX.Element {
 }
 
 
-//redux
-
+/**
+ * @redux
+ */
 /*
   const mapDispatchToProps = (dispatch: any) => ({
     asyncClick: () => dispatch(asynCount(num)),

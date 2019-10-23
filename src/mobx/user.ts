@@ -1,4 +1,4 @@
-import { saveUserinfo, getUserinfo } from "../lib/cache";
+import { _UserInfo } from "../lib/Storage";
 import { observable, action, runInAction } from "mobx";
 import { login } from "../api";
 import { IUser, ILoginParams } from "MobxStore";
@@ -11,7 +11,7 @@ export interface IUserinfo {
 
 class User implements IUser {
     @observable
-    public userinfo: IUserinfo = getUserinfo();
+    public userinfo: IUserinfo = _UserInfo.getData();
     @observable
     public isLoading: boolean = false;
 
@@ -25,7 +25,7 @@ class User implements IUser {
                 this.userinfo = result;
                 this.isLoading = true;
             });
-            saveUserinfo(params);
+            _UserInfo.save(params);
         } catch {
             runInAction(() => {
                 this.isLoading = false;

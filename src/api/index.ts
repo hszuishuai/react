@@ -1,15 +1,13 @@
 import axios from "../lib/axios";
+import { ILoginParams } from "MobxStore";
 
 //const BASE_URL = "http://localhost:4000"
 interface IFunc<T> {
     (parasm: T): Promise<any>;
 }
 
-export interface ILoginParasm {
-    username: string;
-    password: string;
-}
-const login: IFunc<ILoginParasm> = (parasm) => {
+
+const login: IFunc<ILoginParams> = (parasm) => {
     return axios.post(`/login`, parasm);
 };
 

@@ -1,8 +1,6 @@
 
 import { observable, action, runInAction } from "mobx";
-//import { login } from "@/api";
-import { getUserinfo } from "../lib/cache";
-import { IStore } from "MobxStore";
+
 // class UserApi {
 //     public getUserinfo = (params: any) => login(params);
 // }

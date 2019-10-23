@@ -1,8 +1,7 @@
 import { CHANEGE_COUTER, SET_USERINFO } from "./actionTypes";
 import {
-    getUserinfo,
-    saveUserinfo
-} from "../lib/cache";
+    _UserInfo,
+} from "../lib/Storage";
 import { createReducer } from "typesafe-actions";
 
 import { setUseinfo, changeCount } from "./actions";
@@ -13,11 +12,11 @@ interface IState {
 }
 const initState: IState = {
     count: 1,
-    userinfo: getUserinfo()
+    userinfo: _UserInfo.getData()
 };
 
 const Reducer: any = createReducer(initState).handleAction(setUseinfo, (state, action) => {
-    saveUserinfo(action.payload.userInfo); //将用户信息存入stoarge
+    _UserInfo.save(action.payload.userInfo); //将用户信息存入stoarge
     return { ...state, userinfo: action.payload.userInfo };
 }).handleAction([CHANEGE_COUTER], (state, action) => {
     console.log(state, action);

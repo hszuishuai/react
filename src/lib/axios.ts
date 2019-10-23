@@ -1,21 +1,21 @@
-import axios from "axios";
+import axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from "axios";
 axios.defaults.timeout = 10000;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(
-    config => {
+    (config: AxiosRequestConfig) => {
         //发送请求操作，统一再请求里加上userId;
         config.headers.userId = window.sessionStorage.getItem("userId");
         return config;
     },
-    error => {
+    (error: AxiosError) => {
         //发送请求错误操作
         console.log("请求失败");
         return Promise.reject(error);
     });
 
 axios.interceptors.response.use(
-    response => {
+    (response: AxiosResponse) => {
         //对响应数据做操作
         // console.log(response)
         if (parseInt(response.data.err, 10) <= 2000000) {
@@ -32,7 +32,7 @@ axios.interceptors.response.use(
             return Promise.reject(response);
         }
     },
-    error => {
+    (error: AxiosError) => {
         //对响应数据错误做操作
         console.log("请求error", error.message);
         return Promise.reject(error);

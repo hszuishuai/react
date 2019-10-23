@@ -99,6 +99,7 @@ const LoginForm: React.SFC<Iprops & RouteComponentProps> = (props) => {
                             prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
                             type="password"
                             placeholder="Password"
+                            autoComplete="on"
                         />,
                     )}
                 </Form.Item>

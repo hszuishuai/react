@@ -1,17 +1,29 @@
 // import './App.css';
-import React, { useState, memo, useMemo, useCallback } from "react";
+import React, { useState, memo, useMemo, useCallback, useEffect, MouseEventHandler } from "react";
 //readux
 // import { connect } from "react-redux";
 import Children from "./component/Children";
-import { removeUserinfo } from "./lib/cache";
+import { _UserInfo } from "./lib/Storage";
 
 interface IState {
   child: string | undefined;
   msg: string;
 }
 
+const useToggle: any = (initValue?: boolean) => {
+  const [value, setValue] = useState(!!initValue);
+  const toggle: any = useCallback(
+    () => {
+      setValue(!value);
+    },
+    [value],
+  );
+  return [value, toggle];
+};
+
+
 //react-Hooks
-const MemoChildren = memo(Children);
+const MemoChildren: any = memo(Children);
 
 const App: React.SFC = (props) => {
 
@@ -21,15 +33,16 @@ const App: React.SFC = (props) => {
   });
   const [count, setCount] = useState(0);
   const { msg, child } = state;
+  const [enable, setToggle] = useToggle(false);
 
+  console.log(enable);
   //useCallback的使用--------------优化子组件的重复渲染
-  const getmsg = (Msg: string) => {
+  const getmsg: any = async (Msg: string) => {
     // setChild(childs)
-    setState({ ...state, msg: Msg });
-    console.log(state);
+    await setState({ ...state, msg: Msg });
   };
-  const loginOut = (): void => {
-    removeUserinfo();
+  const loginOut: any = (): void => {
+    _UserInfo.remove();
     console.log(1);
   };
 
@@ -43,11 +56,13 @@ const App: React.SFC = (props) => {
       />
       <h1>{child}</h1>
       <p>{count}</p>
+      <p>{enable}</p>
       <button onClick={loginOut}>退出</button>
       <button onClick={() => setCount(count + 1)}>点击</button>
+      <button onClick={setToggle}>toggle</button>
     </div>
   );
-}
+};
 
 //redux
 // export default connect()(App);

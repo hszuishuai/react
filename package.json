@@ -5,6 +5,7 @@
   "proxy": "http://localhost:4000",
   "dependencies": {
     "@types/axios": "^0.14.0",
+    "@types/good-storage": "^1.1.0",
     "@types/react": "^16.9.5",
     "@types/react-dom": "^16.9.1",
     "@types/react-loadable": "^5.5.1",

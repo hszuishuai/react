@@ -1,5 +1,4 @@
 
-
 declare module "MyModel" {
     export type Userinfo = {
         error?: string;
