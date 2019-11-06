@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React from "react";
 
 /**
  *  @redux
@@ -6,18 +6,13 @@ import React, { ComponentProps } from "react";
 //import { connect } from "react-redux";
 //import { RootState } from "typesafe-actions";
 
-import { Route, Redirect, withRouter, RouteComponentProps } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import { IUser } from "MobxStore";
+import { IUser } from "../mobx/user/type";
+import { IProps } from "../../typing";
 
 
 
-export interface IProps extends RouteComponentProps {
-    component?: ComponentProps<any>;
-    key: string;
-    exact: boolean;
-    path: string;
-}
 
 /**
  * @redux

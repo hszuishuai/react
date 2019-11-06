@@ -26,7 +26,7 @@ const routeList: IRouter[] = [
 ];
 
 class App extends Component {
-    public render(): JSX.Element {
+    public render(): React.ReactNode {
         return (
             <Router>
                 <Switch>

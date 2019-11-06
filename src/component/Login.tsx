@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Form, Icon, Input, Button, Checkbox, message } from "antd";
 
 import { observer, inject } from "mobx-react";
-import { IUser, ILoginParams } from "MobxStore";
+import { IUser, ILoginParams } from "../mobx/user/type";
 import { RouteComponentProps } from "react-router";
 //import Loading from "./loading"
 
@@ -59,7 +59,7 @@ const LoginForm: React.SFC<Iprops & RouteComponentProps> = (props) => {
         },
         [userinfo]);
 
-    const handleSubmit: any = (e: MouseEvent) => {
+    const handleSubmit: React.ReactEventHandler = (e) => {
         e.preventDefault();
         console.log("Received values of form: ", props.form);
         props.form.validateFields(async (err: string, values: any) => {

@@ -1,5 +1,5 @@
 import axios from "../lib/axios";
-import { ILoginParams } from "MobxStore";
+import { ILoginParams } from "../mobx/user/type";
 
 //const BASE_URL = "http://localhost:4000"
 interface IFunc<T> {

@@ -8,6 +8,7 @@ import { _UserInfo } from "./lib/Storage";
 interface IState {
   child: string | undefined;
   msg: string;
+
 }
 
 const useToggle: any = (initValue?: boolean) => {
@@ -25,7 +26,7 @@ const useToggle: any = (initValue?: boolean) => {
 //react-Hooks
 const MemoChildren: any = memo(Children);
 
-const App: React.SFC = (props) => {
+const App: React.SFC<IState> = (props) => {
 
   const [state, setState] = useState<IState>({
     child: undefined,
@@ -37,9 +38,12 @@ const App: React.SFC = (props) => {
 
   console.log(enable);
   //useCallback的使用--------------优化子组件的重复渲染
+  //使用 useState 避免数据的错乱
   const getmsg: any = async (Msg: string) => {
     // setChild(childs)
-    await setState({ ...state, msg: Msg });
+    await setState((pevState): IState => {
+      return { ...pevState, msg: Msg };
+    });
   };
   const loginOut: any = (): void => {
     _UserInfo.remove();

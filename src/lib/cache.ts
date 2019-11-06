@@ -10,7 +10,7 @@ export default class StorageData {
     private type: string;
 
     //保存数据
-    public save<T>(typeData: T): any {
+    public save<T>(typeData: T): T {
         Storage.set(this.type);
         return typeData;
     }

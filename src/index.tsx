@@ -23,16 +23,14 @@ import * as serviceWorker from "./serviceWorker";
 configure({ enforceActions: "observed" });
 //import {BrowserRouter as Router ,Route,Link} from 'react-router-dom'
 
-const hasHistory: any = createHashHistory();
-const history: any = syncHistoryWithStore(hasHistory, new RouterStore());
+// const hasHistory: any = createHashHistory();
+// const history: any = syncHistoryWithStore(hasHistory, new RouterStore());
 
 
 
 ReactDOM.render(
   <Provider {...store}>
-    <Router history={history}>
-      <App />
-    </Router>
+    <App />
   </Provider>,
   document.getElementById("root")
 );

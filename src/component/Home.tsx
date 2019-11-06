@@ -46,8 +46,31 @@ interface Props {
 //redux
 //{ onIncreaseClick, asyncClick, count }: Props
 
+
+
 //mobx
 //props: Props
+
+interface Person {
+    name: string;
+    sex: "男" | "女";
+}
+
+const List: Person[] = [
+    {
+        name: "小明",
+        sex: "男"
+    },
+    {
+        name: "小红",
+        sex: "女"
+    },
+    {
+        name: "小花",
+        sex: "女"
+    }
+];
+
 function Home(props: Props): JSX.Element {
     const { count, changCount, asynCount } = props.store;
     // console.log(props.store.count);
@@ -71,11 +94,18 @@ function Home(props: Props): JSX.Element {
     //     console.log(this.props.match)
     // }
 
+    const _rendList: any = () => {
+        return List.map((item) =>
+            <li key={item.name}>{item.name} || {item.sex}</li>
+        );
+    };
+
     return (<div className="Home">
         <div className="home">home页面</div>
         <button onClick={() => changCount(5)}>点击</button>
         <button onClick={() => asynCount(2)}>saga</button>
         <h1>{count}</h1>
+        <ul>{_rendList()}</ul>
     </div>);
 }
 
