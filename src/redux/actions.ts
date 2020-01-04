@@ -9,20 +9,36 @@ import { Userinfo } from "MyModel";
 import { createAction } from "typesafe-actions";
 
 
+type TPayLoad =  {
+    userInfo?: Userinfo;
+    count?: number;
+};
 
-const changeCount = createAction(CHANEGE_COUTER, (actions) => {
+interface IAction {
+    type: string;
+    payload: {
+        [p in keyof TPayLoad]: TPayLoad[p]
+    };
+}
+type TAction<T> = {
+    // (userInfo: T ): IAction<T>
+    (e: T): IAction
+};
+
+
+const changeCount: TAction<number> = createAction(CHANEGE_COUTER, (actions) => {
     return (count: number) => actions({ count });
 }
 );
-const asynCount = createAction(ASYNC_CHNAGE_COUTER, (actions) => {
-    return (count: number) => actions({ count });
+const asynCount: TAction<number> = createAction(ASYNC_CHNAGE_COUTER, (actions) => {
+    return (count: number) => actions({ count});
 });
 
-const setUseinfo = createAction(SET_USERINFO, (actions) => {
+const setUseinfo: TAction<Userinfo> = createAction(SET_USERINFO, (actions) => {
     return (userInfo: Userinfo) => actions({ userInfo });
 });
 
-const asyncUseinfo = createAction(ASYNC_SET_USERINFO, (actions) => {
+const asyncUseinfo: TAction<Userinfo> = createAction(ASYNC_SET_USERINFO, (actions) => {
     return (userInfo: Userinfo) => actions({ userInfo });
 });
 

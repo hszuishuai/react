@@ -8,3 +8,10 @@ export interface IProps extends RouteComponentProps {
     exact: boolean;
     path: string;
 }
+
+
+
+export interface IOnclick<T> {
+    (e?: T): void;
+}
+

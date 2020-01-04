@@ -1,10 +1,6 @@
 
 import { observable, action, runInAction } from "mobx";
 
-// class UserApi {
-//     public getUserinfo = (params: any) => login(params);
-// }
-
 
 class Store {
     // constructor(UserApi: any) {

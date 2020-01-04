@@ -8,13 +8,13 @@ export interface ListItemProps {
 export type ListType = {
     List: ListItemProps[]
 };
-interface _func<T> {
+interface TFunc<T> {
     (item: T): JSX.Element;
 }
 
 const ListItem: React.SFC<ListType> = (props) => {
     const { List } = props;
-    const _rendItme: any = (item: ListItemProps): JSX.Element => {
+    const _rendItem: TFunc<ListItemProps> = (item): JSX.Element => {
         return (
             <li>{item.name} || {item.sex}</li>
         );
@@ -22,7 +22,7 @@ const ListItem: React.SFC<ListType> = (props) => {
     return (
         <ul>
             {
-                List.map(_rendItme)
+                List.map(_rendItem)
             }
         </ul>
     );

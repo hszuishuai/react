@@ -1,6 +1,8 @@
 // import './App.css';
 import React, { useState, memo, useMemo, useCallback, useEffect, MouseEventHandler } from "react";
-//readux
+
+import { IOnclick } from "../typing";
+// redux
 // import { connect } from "react-redux";
 import Children from "./component/Children";
 import { _UserInfo } from "./lib/Storage";
@@ -39,15 +41,14 @@ const App: React.SFC<IState> = (props) => {
   console.log(enable);
   //useCallback的使用--------------优化子组件的重复渲染
   //使用 useState 避免数据的错乱
-  const getmsg: any = async (Msg: string) => {
-    // setChild(childs)
+  const getMsg: (Msg: string) => Promise<void> = async (Msg) => {
+    // setChild( childe)
     await setState((pevState): IState => {
       return { ...pevState, msg: Msg };
     });
   };
-  const loginOut: any = (): void => {
+  const loginOut: IOnclick<any> = (): void => {
     _UserInfo.remove();
-    console.log(1);
   };
 
   return (
@@ -56,12 +57,12 @@ const App: React.SFC<IState> = (props) => {
       {/* <MemoChildren  news={msg} /> */}
       <MemoChildren
         news={useMemo(() => msg, [msg])}
-        setmsg={useCallback((Msg) => getmsg(Msg), [])}
+        setMsg={useCallback((Msg) => getMsg(Msg), [])}
       />
       <h1>{child}</h1>
       <p>{count}</p>
       <p>{enable}</p>
-      <button onClick={loginOut}>退出</button>
+      <button onClick={ () => loginOut()}>退出</button>
       <button onClick={() => setCount(count + 1)}>点击</button>
       <button onClick={setToggle}>toggle</button>
     </div>

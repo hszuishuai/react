@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import ListItem, { ListItemProps } from "./ListItem";
+
 /**
  * @redux
  */
@@ -51,12 +53,7 @@ interface Props {
 //mobx
 //props: Props
 
-interface Person {
-    name: string;
-    sex: "男" | "女";
-}
-
-const List: Person[] = [
+const List: ListItemProps[] = [
     {
         name: "小明",
         sex: "男"
@@ -105,7 +102,7 @@ function Home(props: Props): JSX.Element {
         <button onClick={() => changCount(5)}>点击</button>
         <button onClick={() => asynCount(2)}>saga</button>
         <h1>{count}</h1>
-        <ul>{_rendList()}</ul>
+        <ListItem List = { List } />
     </div>);
 }
 

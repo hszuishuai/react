@@ -14,9 +14,9 @@ import "antd/dist/antd.css";
 import { configure } from "mobx";
 import { Provider } from "mobx-react";
 import * as store from "./mobx";
-import { createHashHistory } from "history";
-import { RouterStore, syncHistoryWithStore } from "mobx-react-router";
-import { Router } from "react-router-dom";
+// import { createHashHistory } from "history";
+// import { RouterStore, syncHistoryWithStore } from "mobx-react-router";
+// import { Router } from "react-router-dom";
 
 import App from "./Router/App";
 import * as serviceWorker from "./serviceWorker";
