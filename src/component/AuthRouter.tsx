@@ -40,9 +40,9 @@ type Props = IProps & IState;
 //react-Hooks
 function AuthRouter(props: Props): JSX.Element {
     const { user, component: Component, ...rest } = props;
-    const { userinfo } = user as IUser;
-    console.log(userinfo);
-    const isLogged: boolean = userinfo !== "" ? true : true;
+    const { userInfo } = user as IUser;
+    console.log(userInfo);
+    const isLogged: boolean = userInfo !== "" ? true : true;
     console.log(isLogged);
 
     return (

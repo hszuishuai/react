@@ -1,12 +1,12 @@
-export interface IUserinfo {
+export interface IUserInfo {
     username?: string;
     token?: string;
     express_time?: string;
 }
 
 export type IUser = {
-    userinfo: object | string;
-    Login: (parms: ILoginParams) => void;
+    userInfo: object | string;
+    Login: (params: ILoginParams) => void;
 };
 
 export interface ILoginParams {

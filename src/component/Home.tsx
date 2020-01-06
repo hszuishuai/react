@@ -69,7 +69,7 @@ const List: ListItemProps[] = [
 ];
 
 function Home(props: Props): JSX.Element {
-    const { count, changCount, asynCount } = props.store;
+    const { count, changCount, asyncCount } = props.store;
     // console.log(props.store.count);
     useEffect(
         () => {
@@ -100,7 +100,7 @@ function Home(props: Props): JSX.Element {
     return (<div className="Home">
         <div className="home">home页面</div>
         <button onClick={() => changCount(5)}>点击</button>
-        <button onClick={() => asynCount(2)}>saga</button>
+        <button onClick={() => asyncCount(2)}>saga</button>
         <h1>{count}</h1>
         <ListItem List = { List } />
     </div>);

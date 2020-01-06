@@ -4,8 +4,8 @@ declare module "MobxStore" {
     export type IStore = {
         count: number;
         changCount: (count: number) => void;
-        userinfo?: object
-        asynCount: (count: number) => void
+        userInfo?: object
+        asyncCount: (count: number) => void
     };
 
     export type IRoot = {

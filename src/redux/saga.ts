@@ -1,11 +1,11 @@
 import { put, call, takeEvery } from "redux-saga/effects";
 import {
-    CHANEGE_COUTER,
-    ASYNC_CHNAGE_COUTER,
+    CHANGE_COUNT,
+    ASYNC_CHANGE_COUNT,
     ASYNC_SET_USERINFO
 } from "./actionTypes";
 import { login } from "../api";
-import { changeCount, setUseinfo } from "./actions";
+import { changeCount, setUserInfo } from "./actions";
 
 // interface IPromise {
 
@@ -18,18 +18,18 @@ const delay: any = (ms: number) => new Promise((resolve, reject) => {
         ms);
 });
 
-function* delayChangeCount() {
+function* delayChangeCount(): any {
     yield call(delay, 2000);
     yield put(changeCount(2));
     // yield call()
 }
-function* apiGetUseinfo(action: any): any {
+function* apiGetUserInfo(action: any): any {
     try {
-        // console.log(action.getUseinfo)
+        // console.log(action.getUserinfo)
         yield call(delay, 2000);
         const res: any = yield call(login, action.userinfo);
-        yield put(setUseinfo(res.data));
-        console.log(setUseinfo(res.data));
+        yield put(setUserInfo(res.data));
+        console.log(setUserInfo(res.data));
     } catch {
         return false;
     }
@@ -40,9 +40,9 @@ function* hello(): Generator<void> {
 }
 
 function* watch(): any {
-    yield takeEvery(ASYNC_CHNAGE_COUTER, delayChangeCount);
-    yield takeEvery(CHANEGE_COUTER, hello);
-    yield takeEvery(ASYNC_SET_USERINFO, apiGetUseinfo);
+    yield takeEvery(ASYNC_CHANGE_COUNT, delayChangeCount);
+    yield takeEvery(CHANGE_COUNT, hello);
+    yield takeEvery(ASYNC_SET_USERINFO, apiGetUserInfo);
 }
 
 export default function* rootSaga(): any {

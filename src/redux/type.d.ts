@@ -1,13 +1,13 @@
 
 declare module "MyModel" {
-    export type Userinfo = {
+    export type UserInfo = {
         error?: string;
         token?: string
     };
     export type ActionType = {
         type: string;
         payload: {
-            userinfo: Userinfo
+            userInfo: UserInfo
         };
     };
 }

@@ -1,25 +1,25 @@
 import { _UserInfo } from "../../lib/Storage";
 import { observable, action, runInAction } from "mobx";
 import { login } from "../../api";
-import { IUserinfo, IUser, ILoginParams } from "./type";
+import { IUserInfo, IUser, ILoginParams } from "./type";
 
 
 class User implements IUser {
     @observable
-    public userinfo: IUserinfo = _UserInfo.getData();
+    public userInfo: IUserInfo = _UserInfo.getData();
     @observable
     public isLoading: boolean = false;
     @action
     public Login = async (params: ILoginParams) => {
         try {
-            const result: IUserinfo = await login(params);
+            const result: IUserInfo = await login(params);
 
             //异步操作中，将要修改的state 放于runInAction中
             runInAction(() => {
-                this.userinfo = result;
+                this.userInfo = result;
                 this.isLoading = true;
             });
-            _UserInfo.save<IUserinfo>(result);
+            _UserInfo.save<IUserInfo>(result);
         } catch {
             runInAction(() => {
                 this.isLoading = false;

@@ -1,16 +1,16 @@
 import {
-    CHANEGE_COUTER,
-    ASYNC_CHNAGE_COUTER,
+    CHANGE_COUNT,
+    ASYNC_CHANGE_COUNT,
     SET_USERINFO,
     ASYNC_SET_USERINFO
 } from "./actionTypes";
 
-import { Userinfo } from "MyModel";
+import { UserInfo } from "MyModel";
 import { createAction } from "typesafe-actions";
 
 
 type TPayLoad =  {
-    userInfo?: Userinfo;
+    userInfo?: UserInfo;
     count?: number;
 };
 
@@ -26,26 +26,26 @@ type TAction<T> = {
 };
 
 
-const changeCount: TAction<number> = createAction(CHANEGE_COUTER, (actions) => {
+const changeCount: TAction<number> = createAction(CHANGE_COUNT, (actions) => {
     return (count: number) => actions({ count });
 }
 );
-const asynCount: TAction<number> = createAction(ASYNC_CHNAGE_COUTER, (actions) => {
+const asyncCount: TAction<number> = createAction(ASYNC_CHANGE_COUNT, (actions) => {
     return (count: number) => actions({ count});
 });
 
-const setUseinfo: TAction<Userinfo> = createAction(SET_USERINFO, (actions) => {
-    return (userInfo: Userinfo) => actions({ userInfo });
+const setUserInfo: TAction<UserInfo> = createAction(SET_USERINFO, (actions) => {
+    return (userInfo: UserInfo) => actions({ userInfo });
 });
 
-const asyncUseinfo: TAction<Userinfo> = createAction(ASYNC_SET_USERINFO, (actions) => {
-    return (userInfo: Userinfo) => actions({ userInfo });
+const asyncUserInfo: TAction<UserInfo> = createAction(ASYNC_SET_USERINFO, (actions) => {
+    return (userInfo: UserInfo) => actions({ userInfo });
 });
 
 export {
-    asynCount,
-    asyncUseinfo,
+    asyncCount,
+    asyncUserInfo,
     changeCount,
-    setUseinfo,
+    setUserInfo,
 };
 

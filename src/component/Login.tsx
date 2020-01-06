@@ -35,19 +35,19 @@ React.SFC<Partial<Props>>
 */
 
 
-type Iprops = Readonly<{
+type IProps = Readonly<{
     form: any;
     user: IUser;
 }>;
 
-const LoginForm: React.SFC<Iprops & RouteComponentProps> = (props) => {
-    const { userinfo, Login } = props.user;
-    //当userinfo 发生变化的时候才会执行effect中的方法 [userinfo],
+const LoginForm: React.SFC<IProps & RouteComponentProps> = (props) => {
+    const { userInfo, Login } = props.user;
+    //当userInfo 发生变化的时候才会执行effect中的方法 [userInfo],
     useEffect(
         () => {
             console.log(props.user);
             // const Prop: any = props;
-            if (userinfo !== "") {
+            if (userInfo !== "") {
                 props.history.push({
                     pathname: "/app"
                 });
@@ -57,18 +57,18 @@ const LoginForm: React.SFC<Iprops & RouteComponentProps> = (props) => {
                 console.log("消失了");
             };
         },
-        [userinfo]);
+        [userInfo]);
 
     const handleSubmit: React.ReactEventHandler = (e) => {
         e.preventDefault();
         console.log("Received values of form: ", props.form);
         props.form.validateFields(async (err: string, values: any) => {
             //const { login } = props;
-            const isLoginUserinfo: ILoginParams = { username: values.username, password: values.password };
+            const isLoginUserInfo: ILoginParams = { username: values.username, password: values.password };
             //const Login: any = login;
             if (!err) {
                 console.log("Received values of form: ", values);
-                Login(isLoginUserinfo);
+                Login(isLoginUserInfo);
                 // message.loading("正在登入中", 2, Login(values));
             }
         });
@@ -128,7 +128,7 @@ const storeLoginForm: any = connect(
 )(LoginForm);
 */
 
-const storeLoginForm: any = inject("user")(observer(LoginForm));
-const FromCompont: any = Form.create({ name: "login-form'" })(storeLoginForm);
+const storeLoginForm: React.SFC<any> = inject("user")(observer(LoginForm));
+const FromComponent: any = Form.create({ name: "login-form'" })(storeLoginForm);
 
-export default FromCompont;
+export default FromComponent;
