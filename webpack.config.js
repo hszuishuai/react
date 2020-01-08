@@ -38,7 +38,17 @@ module.exports = {
             //这几个都是css,loader
             {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader',
+                use:[
+                    'style-loader',
+                    {
+                        loader:'css-loader',
+                        options:{
+                            modules:true,
+                            localIdentName: '[hash:base64:5]'
+                        }
+                    },
+                    'postcss-loader'
+                ]
             },
             {
                 test: /\.scss$/,
