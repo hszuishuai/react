@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 
+//master
+
 module.exports = {
     mode: 'development', //"production" | "development" | "none"
     entry: './src/index.tsx', //入口文件
@@ -38,11 +40,23 @@ module.exports = {
             //这几个都是css,loader
             {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader',
+                use:[
+                    'style-loader',
+                    {
+                        loader:'css-loader',
+                        options:{
+                            modules:true,
+                            localIdentName: '[hash:base64:6]'
+                        }
+                    },
+                    'postcss-loader'
+                ]
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                use: [
+                    'style-loader', 'css-loader', 'sass-loader'
+                ],
                 exclude: /node_modules/,
             },
             //这个file-loader，暂时不用就去掉吧

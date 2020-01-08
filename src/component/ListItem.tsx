@@ -16,7 +16,7 @@ const ListItem: React.SFC<ListType> = (props) => {
     const { List } = props;
     const _rendItem: TFunc<ListItemProps> = (item): JSX.Element => {
         return (
-            <li>{item.name} || {item.sex}</li>
+            <li key={item.name}>{item.name} || {item.sex}</li>
         );
     };
     return (
