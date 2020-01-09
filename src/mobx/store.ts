@@ -17,7 +17,7 @@ class Store {
         this.count += num;
     }
     @action
-    public asynCount = (num: number) => {
+    public asyncCount = (num: number) => {
         runInAction(
             () => {
                 setTimeout(

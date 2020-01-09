@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import ListItem, { ListItemProps } from "./ListItem";
 
+import styles from "./Home.module.css";
 /**
  * @redux
  */
@@ -97,8 +98,8 @@ function Home(props: Props): JSX.Element {
         );
     };
 
-    return (<div className="Home">
-        <div className="home">home页面</div>
+    return (<div className={styles.home}>
+        <div className={styles.home}>home页面</div>
         <button onClick={() => changCount(5)}>点击</button>
         <button onClick={() => asyncCount(2)}>saga</button>
         <h1>{count}</h1>
