@@ -3,7 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 
-//masters
+
+//master
+
 
 module.exports = {
     mode: 'development', //"production" | "development" | "none"
