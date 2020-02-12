@@ -5,10 +5,11 @@ import "antd/dist/antd.css";
 //import App from './App';
 //import Home from './component/Home'
 
+import "./common/reset.css";
+
 //redux
 //import store from "./redux";
 //import { Provider } from "react-redux";
-
 
 //mobx
 import { configure } from "mobx";
@@ -25,8 +26,6 @@ configure({ enforceActions: "observed" });
 
 // const hasHistory: any = createHashHistory();
 // const history: any = syncHistoryWithStore(hasHistory, new RouterStore());
-
-
 
 ReactDOM.render(
   <Provider {...store}>

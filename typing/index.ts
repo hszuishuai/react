@@ -5,7 +5,7 @@ import { ComponentProps } from "react";
 export interface IProps extends RouteComponentProps {
     component?: ComponentProps<any>;
     key: string;
-    exact: boolean;
+    exact?: boolean;
     path: string;
 }
 

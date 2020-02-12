@@ -11,9 +11,6 @@ import { inject, observer } from "mobx-react";
 import { IUser } from "../mobx/user/type";
 import { IProps } from "../../typing";
 
-
-
-
 /**
  * @redux
  */
@@ -27,33 +24,36 @@ interface Istate {
 const mapStateToProps: ImapState<RootState, Istate> = (state) => ({
     userinfo: state.userinfo
 });
-
 type Props = ReturnType<typeof mapStateToProps> & IProps;
 */
 
 interface IState {
-    user?: IUser;
+  user?: IUser;
 }
 
 type Props = IProps & IState;
 
 //react-Hooks
 function AuthRouter(props: Props): JSX.Element {
-    const { user, component: Component, ...rest } = props;
-    const { userInfo } = user as IUser;
-    console.log(userInfo);
-    const isLogged: boolean = userInfo !== "" ? true : true;
-    console.log(isLogged);
+  const { user, component: Component, ...rest } = props;
+  const { userInfo } = user as IUser;
+  console.log(userInfo);
+  const isLogged: boolean = userInfo !== "" ? true : false;
+  console.log(isLogged);
 
-    return (
-        <Route {...rest} render={(routeProps) => {
-            return isLogged
-                ? <Component {...routeProps} />
-                : <Redirect to="/login" />;
-        }} />
-    );
+  return (
+    <Route
+      {...rest}
+      render={routeProps => {
+        return isLogged ? (
+          <Component {...routeProps} />
+        ) : (
+          <Redirect to="/login" />
+        );
+      }}
+    />
+  );
 }
-
 
 /**
  * @redux
