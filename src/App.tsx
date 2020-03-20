@@ -4,8 +4,8 @@ import React, { useState, memo, useMemo, useCallback } from "react";
 import { IOnclick } from "../typing";
 // redux
 // import { connect } from "react-redux";
-import Children from "./component/Children";
-import { _UserInfo } from "./lib/Storage";
+import Children from "@/component/Children";
+import { _UserInfo } from "@/lib/Storage";
 
 interface IState {
   child: string | undefined;

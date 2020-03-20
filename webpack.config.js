@@ -1,12 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 
-
 //master
-
-
 module.exports = {
     mode: 'development', //"production" | "development" | "none"
     entry: './src/index.tsx', //入口文件
@@ -42,12 +41,12 @@ module.exports = {
             //这几个都是css,loader
             {
                 test: /\.css$/,
-                use:[
+                use: [
                     'style-loader',
                     {
-                        loader:'css-loader',
-                        options:{
-                            modules:true,
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
                             localIdentName: '[hash:base64:6]'
                         }
                     },
@@ -69,7 +68,11 @@ module.exports = {
                     name: '[path][name].[ext]',
                 },
             },
-            { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                loader: 'source-map-loader'
+            },
         ],
     },
     devServer: {
@@ -91,16 +94,6 @@ module.exports = {
         },
     },
     //路径映射，让我们跨文件夹导入资源更方便简洁，ts项目需要配置两处：tsconfig.json路径映射以及webpack
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json'],
-        alias: {
-            '@component': path.resolve(__dirname, './src/component'),
-            '@page': path.resolve(__dirname, './src/page'),
-            '@utils': path.resolve(__dirname, './src/utils'),
-            '@api': path.resolve(__dirname, './src/api'),
-
-        },
-    },
     plugins: [
         //插件配置
         new CleanWebpackPlugin(),
@@ -115,4 +108,4 @@ module.exports = {
             },
         }),
     ],
-};
+}

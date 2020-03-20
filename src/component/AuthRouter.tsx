@@ -6,10 +6,11 @@ import React from "react";
 //import { connect } from "react-redux";
 //import { RootState } from "typesafe-actions";
 
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, Redirect, withRouter, Switch } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { IUser } from "../mobx/user/type";
-import { IProps } from "../../typing";
+import { IRouter } from "../../typing";
+import Books from "../pages/books";
 
 /**
  * @redux
@@ -31,27 +32,36 @@ interface IState {
   user?: IUser;
 }
 
-type Props = IProps & IState;
+type Props = IRouter & IState;
 
 //react-Hooks
 function AuthRouter(props: Props): JSX.Element {
-  const { user, component: Component, ...rest } = props;
+  const { user, component: Component, children, ...rest } = props;
   const { userInfo } = user as IUser;
   console.log(userInfo);
-  const isLogged: boolean = userInfo !== "" ? true : false;
+  const isLogged: boolean = userInfo !== "" ? true : true;
   console.log(isLogged);
 
-  return (
+  return isLogged ? (
     <Route
       {...rest}
       render={routeProps => {
-        return isLogged ? (
-          <Component {...routeProps} />
-        ) : (
-          <Redirect to="/login" />
-        );
+        if (children) {
+          return (
+            <div>
+              <Component {...routeProps} />
+              <Switch>
+                {
+                  children.map((child: IRouter) => {})
+                }
+              </Switch>
+            </div>
+          );
+        }
       }}
     />
+  ) : (
+    <Redirect to="/login" />
   );
 }
 
@@ -59,7 +69,6 @@ function AuthRouter(props: Props): JSX.Element {
  * @redux
  */
 
-// tslint:disable-next-line:typedef
 //const storeAuthRouter = connect(mapStateToProps)(AuthRouter);
 
 /**

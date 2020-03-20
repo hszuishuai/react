@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
-import ListItem, { ListItemProps } from "../../component/ListItem";
-
+import React, { useEffect, useMemo } from "react";
+import { Link, useHistory } from "react-router-dom";
+// import NavigationBar from "../../component/navigationBar";
 import styles from "./Home.module.css";
+import ArticleView from "@/component/article/article";
+import { IArticleProps } from "@type/index";
+
 /**
  * @redux
  */
@@ -19,7 +22,7 @@ import styles from "./Home.module.css";
  * @mobx
  */
 import { observer, inject } from "mobx-react";
-import { IStore } from "MobxStore";
+//import { IStore } from "MobxStore";
 
 //import { withRouter } from "react-router-dom";
 
@@ -41,8 +44,16 @@ import { IStore } from "MobxStore";
 /**
  * @mobx
  */
+
+export type IStore = {
+    count: number;
+    changCount: (count: number) => void;
+    userInfo?: object;
+    asyncCount: (count: number) => void;
+};
 interface Props {
-  store: IStore;
+    store: IStore;
+    children: React.ReactNode;
 }
 //redux
 //{ onIncreaseClick, asyncClick, count }: Props
@@ -50,58 +61,70 @@ interface Props {
 //mobx
 //props: Props
 
-const List: ListItemProps[] = [
-  {
-    name: "小明",
-    sex: "男"
-  },
-  {
-    name: "小红",
-    sex: "女"
-  },
-  {
-    name: "小花",
-    sex: "女"
-  }
+export interface IndexRouter {
+    component: React.ComponentProps<any>;
+    path: string;
+    text?: string;
+}
+const articleList: IArticleProps[] = [
+    {
+        theme: "专栏",
+        title: "string",
+        author: "string",
+        releaseTime: "string",
+        types: ["122", "222"],
+        likes: 22,
+        comments: 10,
+        articleUrl: "https://bbs.a9vg.com/uc_server/data/avatar/001/44/49/25_avatar_middle.jpg"
+    },
+    {
+        theme: "专栏",
+        title: "string",
+        author: "xiaosan",
+        releaseTime: "string",
+        types: ["122", "222"],
+        likes: 22,
+        comments: 10,
+        articleUrl: ""
+    }
 ];
 
 function Home(props: Props): JSX.Element {
-  const { count, changCount, asyncCount } = props.store;
-  // console.log(props.store.count);
-  useEffect(
-    () => {
-      setTimeout((): void => {
-        // asynCount(2);
-      }, 2000);
-      return () => {
-        console.log(5);
-      };
-    }
-    //[onIncreaseClick]
-  );
-  // componentDidMount() {
-  //     setTimeout(() => {
-  //     }, 2000)
-  //     console.log(this.props.match)
-  // }
+    const { count, changCount, asyncCount } = props.store;
+    const History: any = useHistory();
+    //TODO: 在useEffect中不能直接使用 async/await
+    /**
+     *  const fun = async ()=> {
+     *     await api();
+     *   }
+     *  fun();
+     */
+    useEffect(() => {
+        setTimeout((): void => {
+            // asyncCount(2);
+        }, 2000);
+        return () => {
+            console.log(5);
+        };
+    });
+    const handClick: any = (id: number) => {
+        console.log(id);
+        History.push(`/post/${id}`);
+    };
 
-  const _rendList: any = () => {
-    return List.map(item => (
-      <li key={item.name}>
-        {item.name} || {item.sex}
-      </li>
-    ));
-  };
-
-  return (
-    <div className={styles.home}>
-      <div className={styles.home}>home页面</div>
-      <button onClick={() => changCount(5)}>点击</button>
-      <button onClick={() => asyncCount(2)}>saga</button>
-      <h1>{count}</h1>
-      <ListItem List={List} />
-    </div>
-  );
+    return (
+        <div className={styles.home}>
+            {/* <NavigationBar RouterList={indexRouter} /> */}
+            <Link to="/home/books">w22</Link>
+            <Link to="/home/topics">w22</Link>
+            {props.children}
+            <div className={styles.home}>home页面</div>
+            <button onClick={() => changCount(5)}>点击</button>
+            <button onClick={() => asyncCount(2)}>saga</button>
+            <h1>{count}</h1>
+            <ArticleView handClick={handClick} articleList={useMemo(() => articleList, [])} />
+        </div>
+    );
 }
 
 /**

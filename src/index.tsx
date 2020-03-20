@@ -5,6 +5,8 @@ import "antd/dist/antd.css";
 //import App from './App';
 //import Home from './component/Home'
 
+import "@/style/global.less";
+
 import "./common/reset.css";
 
 //redux
@@ -19,7 +21,7 @@ import * as store from "./mobx";
 // import { RouterStore, syncHistoryWithStore } from "mobx-react-router";
 // import { Router } from "react-router-dom";
 
-import App from "./Router/App";
+import App from "./router/App";
 import * as serviceWorker from "./serviceWorker";
 configure({ enforceActions: "observed" });
 //import {BrowserRouter as Router ,Route,Link} from 'react-router-dom'

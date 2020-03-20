@@ -8,10 +8,10 @@ declare module "MobxStore" {
         asyncCount: (count: number) => void
     };
 
-    export type IRoot = {
-        store: IStore;
-        user: IUser
-    };
+    // export type IRoot = {
+    //     store: IStore;
+    //     user: IUser;
+    // };
 
 }
 //export as namespace IStore;

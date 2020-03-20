@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
-import { Form, Icon, Input, Button, Checkbox, message } from "antd";
-import styles from "./login.module.css";
+import React, { useEffect, useState } from "react";
+import { Form, Input, Button, Checkbox } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
+import styles from "./login.module.css";
+import { useHistory } from "react-router-dom";
 import { observer, inject } from "mobx-react";
 import { IUser, ILoginParams } from "../../mobx/user/type";
 import { RouteComponentProps } from "react-router";
@@ -36,89 +38,85 @@ React.SFC<Partial<Props>>
 */
 
 type IProps = Readonly<{
-  form: any;
-  user: IUser;
+    form: any;
+    user: IUser;
 }>;
 
 const LoginForm: React.SFC<IProps & RouteComponentProps> = props => {
-  const { userInfo, Login } = props.user;
-  //当userInfo 发生变化的时候才会执行effect中的方法 [userInfo],
-  useEffect(() => {
-    console.log(props.user);
-    // const Prop: any = props;
-    if (userInfo !== "") {
-      props.history.push({
-        pathname: "/app"
-      });
-      message.success("登入成功", 1);
-    }
-    return () => {
-      console.log("消失了");
-    };
-  }, [userInfo]);
+    const { userInfo, Login } = props.user;
+    const [Loading, setLoading] = useState<boolean>(false);
+    const History: any = useHistory();
+    //当userInfo 发生变化的时候才会执行effect中的方法 [userInfo],
+    useEffect(() => {
+        console.log(props.user);
+        // const Prop: any = props;
+        if (userInfo) {
+            History.push("/app");
+            //message.success("登入成功", 1);
+        }
+        return () => {
+            console.log("消失了");
+        };
+    }, [userInfo, History, props.user]);
 
-  const handleSubmit: React.ReactEventHandler = e => {
-    e.preventDefault();
-    console.log("Received values of form: ", props.form);
-    props.form.validateFields(async (err: string, values: any) => {
-      //const { login } = props;
-      const isLoginUserInfo: ILoginParams = {
-        username: values.username,
-        password: values.password
-      };
-      //const Login: any = login;
-      if (!err) {
-        console.log("Received values of form: ", values);
-        Login(isLoginUserInfo);
-        // message.loading("正在登入中", 2, Login(values));
-      }
-    });
-  };
-  const { getFieldDecorator } = props.form;
-  return (
-    <div>
-      {/* <Loading/> */}
-      <Form onClick={e => handleSubmit(e)} className={styles.login_form}>
-        <Form.Item>
-          {getFieldDecorator("username", {
-            rules: [{ required: true, message: "Please input your username!" }]
-          })(
-            <Input
-              className={styles.login_input}
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Username"
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator("password", {
-            rules: [{ required: true, message: "Please input your Password!" }]
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password"
-              placeholder="Password"
-              autoComplete="on"
-              className={styles.login_input}
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator("remember", {
-            initialValue: true,
-            valuePropName: "checked"
-          })(<Checkbox className={styles.login_input}>Remember me</Checkbox>)}
-          <Button
-            type="primary"
-            htmlType="submit"
-            className={styles.login_form_button}
-          >
-            Log in
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
-  );
+    const onFinishFailed: any = () => {
+        console.log("error");
+    };
+    const handleSubmit: React.ReactEventHandler = e => {
+        e.preventDefault();
+        setLoading(true);
+        console.log("Received values of form: ", props.form);
+        props.form.validateFields(async (err: string, values: any) => {
+            //const { login } = props;
+            const isLoginUserInfo: ILoginParams = {
+                username: values.username,
+                // tslint:disable-next-line: object-literal-sort-keys
+                password: values.password
+            };
+            //const Login: any = login;
+            if (!err) {
+                console.log("Received values of form: ", values);
+                setTimeout(() => {
+                    Login(isLoginUserInfo);
+                    setLoading(false);
+                }, 2000);
+                // message.loading("正在登入中", 2, Login(values));
+            }
+        });
+    };
+    return (
+        <div>
+            {/* <Loading/> */}
+            <Form name="normal_login" className="login-form" initialValues={{ remember: true }}>
+                <Form.Item name="username" rules={[{ required: true, message: "Please input your Username!" }]}>
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                </Form.Item>
+                <Form.Item name="password" rules={[{ required: true, message: "Please input your Password!" }]}>
+                    <Input
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="Password"
+                    />
+                </Form.Item>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                    <Checkbox>Remember me</Checkbox>
+                </Form.Item>
+                <Form.Item>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        loading={Loading}
+                        disabled={Loading}
+                        onClick={e => handleSubmit(e)}
+                        className={styles.login_form_button}
+                    >
+                        {" "}
+                        {Loading ? "" : "登录"}
+                    </Button>
+                </Form.Item>
+            </Form>
+        </div>
+    );
 };
 
 /**
@@ -132,6 +130,6 @@ const storeLoginForm: any = connect(
 */
 
 const storeLoginForm: React.SFC<any> = inject("user")(observer(LoginForm));
-const FromComponent: any = Form.create({ name: "login-form'" })(storeLoginForm);
+//const FromComponent: any = Form.create({"name: 'normal_login"})(storeLoginForm);
 
-export default FromComponent;
+export default storeLoginForm;

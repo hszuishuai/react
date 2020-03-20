@@ -1,0 +1,8 @@
+{
+    "wxmlConfig.onSaveFormat": true,
+    "editor.formatOnSave": true,
+    "editor.cursorSmoothCaretAnimation": true,
+    "path-intellisense.mappings": {
+        "@": "${workspaceRoot}/src"
+    }
+}
