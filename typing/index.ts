@@ -24,14 +24,8 @@ export interface IArticleProps {
     articleUrl: string;
 }
 
-export interface IArticlesProps {
-
-}
-
-
-
+export interface IArticlesProps {}
 
 export interface IOnclick<T> {
     (e?: T): void;
 }
-
