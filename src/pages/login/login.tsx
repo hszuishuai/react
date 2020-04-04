@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 import styles from "./login.module.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { observer, inject } from "mobx-react";
 import { IUser, ILoginParams } from "../../mobx/user/type";
 import { RouteComponentProps } from "react-router";
@@ -45,7 +45,7 @@ type IProps = Readonly<{
 const LoginForm: React.SFC<IProps & RouteComponentProps> = props => {
     const { userInfo, Login } = props.user;
     const [Loading, setLoading] = useState<boolean>(false);
-    const History: any = useHistory();
+    const History: any = useNavigate();
     //当userInfo 发生变化的时候才会执行effect中的方法 [userInfo],
     useEffect(() => {
         console.log(props.user);

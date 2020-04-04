@@ -1,9 +1,11 @@
 import React, { useEffect, useMemo } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import NavigationBar from "../../component/navigationBar";
 import styles from "./Home.module.css";
 import ArticleView from "@/component/article/article";
 import { IArticleProps } from "@type/index";
+
+import useMountState from "@/hooks/useMountState";
 
 /**
  * @redux
@@ -91,7 +93,7 @@ const articleList: IArticleProps[] = [
 
 function Home(props: Props): JSX.Element {
     const { count, changCount, asyncCount } = props.store;
-    const History: any = useHistory();
+    const navigate: any = useNavigate();
     //TODO: 在useEffect中不能直接使用 async/await
     /**
      *  const fun = async ()=> {
@@ -109,7 +111,7 @@ function Home(props: Props): JSX.Element {
     });
     const handClick: any = (id: number) => {
         console.log(id);
-        History.push(`/post/${id}`);
+        navigate(`/post/${id}`);
     };
 
     return (

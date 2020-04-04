@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from "react";
-import { BrowserRouter as Router, Route, Switch, RouteComponentProps, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, RouteComponentProps, Redirect } from "react-router-dom";
 import Loading from "@/component/loading";
 //import AuthRouter from "@/component/AuthRouter";
 import Login from "@/pages/login/login";
@@ -14,10 +14,10 @@ const renderRoute: any = (r: IRouter) => {
                 exact={r.exact}
                 render={(props: RouteComponentProps) => (
                     <r.component {...props}>
-                        <Switch>
+                        <Routes>
                             {r.children!.map(key => renderRoute(key))}
                             <Redirect from={r.path} to={r.children![0].path} />
-                        </Switch>
+                        </Routes>
                     </r.component>
                 )}
             />
@@ -38,7 +38,7 @@ class App extends Component {
     public render(): JSX.Element {
         return (
             <Router>
-                <Switch>
+                <Routes>
                     <Suspense fallback={<Loading />}>
                         <Route path="/login" exact component={Login} />
                         {RouterList.map(
@@ -59,7 +59,7 @@ class App extends Component {
                             // />
                         )}
                     </Suspense>
-                </Switch>
+                </Routes>
             </Router>
         );
     }

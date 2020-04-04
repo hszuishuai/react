@@ -21,7 +21,7 @@ import * as store from "./mobx";
 // import { RouterStore, syncHistoryWithStore } from "mobx-react-router";
 // import { Router } from "react-router-dom";
 
-import App from "./router/App";
+import App from "@/Router/App";
 import * as serviceWorker from "./serviceWorker";
 configure({ enforceActions: "observed" });
 //import {BrowserRouter as Router ,Route,Link} from 'react-router-dom'
@@ -30,10 +30,10 @@ configure({ enforceActions: "observed" });
 // const history: any = syncHistoryWithStore(hasHistory, new RouterStore());
 
 ReactDOM.render(
-  <Provider {...store}>
-    <App />
-  </Provider>,
-  document.getElementById("root")
+    <Provider {...store}>
+        <App />
+    </Provider>,
+    document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

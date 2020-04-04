@@ -1385,14 +1385,6 @@
   resolved "https://registry.npm.taobao.org/@types/history/download/@types/history-4.7.3.tgz#856c99cdc1551d22c22b18b5402719affec9839a"
   integrity sha1-hWyZzcFVHSLCKxi1QCcZr/7Jg5o=
 
-"@types/hoist-non-react-statics@^3.3.0":
-  version "3.3.1"
-  resolved "https://registry.npm.taobao.org/@types/hoist-non-react-statics/download/@types/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
-  integrity sha1-ESSq/lEYy1kZd66xzqrtEHDrA58=
-  dependencies:
-    "@types/react" "*"
-    hoist-non-react-statics "^3.3.0"
-
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
   resolved "https://registry.npm.taobao.org/@types/istanbul-lib-coverage/download/@types/istanbul-lib-coverage-2.0.1.tgz#42995b446db9a48a11a07ec083499a860e9138ff"
@@ -1433,35 +1425,17 @@
   resolved "https://registry.npm.taobao.org/@types/q/download/@types/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha1-aQoUdbhPKohP0HzXl8APXzE1bqg=
 
-"@types/react-dom@^16.9.1":
-  version "16.9.1"
-  resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.1.tgz?cache=0&sync_timestamp=1569366736227&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-16.9.1.tgz#79206237cba9532a9f870b1cd5428bef6b66378c"
-  integrity sha1-eSBiN8upUyqfhwsc1UKL72tmN4w=
+"@types/react-dom@^16.9.5":
+  version "16.9.5"
+  resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.5.tgz?cache=0&sync_timestamp=1580844872885&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-16.9.5.tgz#5de610b04a35d07ffd8f44edad93a71032d9aaa7"
+  integrity sha1-XeYQsEo10H/9j0TtrZOnEDLZqqc=
   dependencies:
     "@types/react" "*"
 
-"@types/react-loadable@^5.5.1":
-  version "5.5.1"
-  resolved "https://registry.npm.taobao.org/@types/react-loadable/download/@types/react-loadable-5.5.1.tgz#f04a262f16e9f088098ddad1aa50682ad0984aa7"
-  integrity sha1-8EomLxbp8IgJjdrRqlBoKtCYSqc=
-  dependencies:
-    "@types/react" "*"
-    "@types/webpack" "*"
-
-"@types/react-redux@^7.1.4":
-  version "7.1.4"
-  resolved "https://registry.npm.taobao.org/@types/react-redux/download/@types/react-redux-7.1.4.tgz?cache=0&sync_timestamp=1569541777967&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-redux%2Fdownload%2F%40types%2Freact-redux-7.1.4.tgz#e0d02a073e730b8b58a6341bddca2ea692ff0bce"
-  integrity sha1-4NAqBz5zC4tYpjQb3couppL/C84=
-  dependencies:
-    "@types/hoist-non-react-statics" "^3.3.0"
-    "@types/react" "*"
-    hoist-non-react-statics "^3.3.0"
-    redux "^4.0.0"
-
-"@types/react-router-dom@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.npm.taobao.org/@types/react-router-dom/download/@types/react-router-dom-5.1.0.tgz?cache=0&sync_timestamp=1569411341515&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-router-dom%2Fdownload%2F%40types%2Freact-router-dom-5.1.0.tgz#8baa84a7fa8c8e7797fb3650ca51f93038cb4caf"
-  integrity sha1-i6qEp/qMjneX+zZQylH5MDjLTK8=
+"@types/react-router-dom@^5.1.3":
+  version "5.1.3"
+  resolved "https://registry.npm.taobao.org/@types/react-router-dom/download/@types/react-router-dom-5.1.3.tgz#b5d28e7850bd274d944c0fbbe5d57e6b30d71196"
+  integrity sha1-tdKOeFC9J02UTA+75dV+azDXEZY=
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
@@ -1475,6 +1449,14 @@
     "@types/history" "*"
     "@types/react" "*"
 
+"@types/react-router@^5.1.4":
+  version "5.1.4"
+  resolved "https://registry.npm.taobao.org/@types/react-router/download/@types/react-router-5.1.4.tgz#7d70bd905543cb6bcbdcc6bd98902332054f31a6"
+  integrity sha1-fXC9kFVDy2vL3Ma9mJAjMgVPMaY=
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+
 "@types/react@*":
   version "16.9.23"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.23.tgz?cache=0&sync_timestamp=1582828523578&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.23.tgz#1a66c6d468ba11a8943ad958a8cb3e737568271c"
@@ -1483,25 +1465,13 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/react@^16.9.5":
-  version "16.9.5"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.5.tgz#079dabd918b19b32118c25fd00a786bb6d0d5e51"
-  integrity sha1-B52r2RixmzIRjCX9AKeGu20NXlE=
+"@types/react@^16.9.25":
+  version "16.9.25"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.25.tgz?cache=0&sync_timestamp=1584727327801&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.25.tgz#6ae2159b40138c792058a23c3c04fd3db49e929e"
+  integrity sha1-auIVm0ATjHkgWKI8PAT9PbSekp4=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
-
-"@types/redux-actions@^2.6.1":
-  version "2.6.1"
-  resolved "https://registry.npm.taobao.org/@types/redux-actions/download/@types/redux-actions-2.6.1.tgz#0940e97fa35ad3004316bddb391d8e01d2efa605"
-  integrity sha1-CUDpf6Na0wBDFr3bOR2OAdLvpgU=
-
-"@types/redux@^3.6.0":
-  version "3.6.0"
-  resolved "https://registry.npm.taobao.org/@types/redux/download/@types/redux-3.6.0.tgz#f1ebe1e5411518072e4fdfca5c76e16e74c1399a"
-  integrity sha1-8evh5UEVGAcuT9/KXHbhbnTBOZo=
-  dependencies:
-    redux "*"
 
 "@types/source-list-map@*":
   version "0.1.2"
@@ -1555,18 +1525,6 @@
     "@types/node" "*"
     "@types/source-list-map" "*"
     source-map "^0.6.1"
-
-"@types/webpack@*":
-  version "4.39.3"
-  resolved "https://registry.npm.taobao.org/@types/webpack/download/@types/webpack-4.39.3.tgz#1d55f8fce117a325368bf7612950552ee4ed4467"
-  integrity sha1-HVX4/OEXoyU2i/dhKVBVLuTtRGc=
-  dependencies:
-    "@types/anymatch" "*"
-    "@types/node" "*"
-    "@types/tapable" "*"
-    "@types/uglify-js" "*"
-    "@types/webpack-sources" "*"
-    source-map "^0.6.0"
 
 "@types/webpack@^4.4.31":
   version "4.39.2"
@@ -8466,7 +8424,7 @@ prompts@^2.0.1:
     kleur "^3.0.2"
     sisteransi "^1.0.0"
 
-prop-types@15.x, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -9093,13 +9051,6 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   resolved "https://registry.npm.taobao.org/react-lifecycles-compat/download/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha1-TxonOv38jzSIqMUWv9p4+HI1I2I=
 
-react-loadable@^5.5.0:
-  version "5.5.0"
-  resolved "https://registry.npm.taobao.org/react-loadable/download/react-loadable-5.5.0.tgz#582251679d3da86c32aae2c8e689c59f1196d8c4"
-  integrity sha1-WCJRZ509qGwyquLI5onFnxGW2MQ=
-  dependencies:
-    prop-types "^15.5.0"
-
 react-redux@^7.1.3:
   version "7.2.0"
   resolved "https://registry.npm.taobao.org/react-redux/download/react-redux-7.2.0.tgz?cache=0&sync_timestamp=1581997949260&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-redux%2Fdownload%2Freact-redux-7.2.0.tgz#f970f62192b3981642fec46fd0db18a074fe879d"
@@ -9298,7 +9249,7 @@ redux-saga@^1.1.3:
   dependencies:
     "@redux-saga/core" "^1.1.3"
 
-redux@*, redux@^4.0.0, redux@^4.0.4:
+redux@^4.0.4:
   version "4.0.4"
   resolved "https://registry.npm.taobao.org/redux/download/redux-4.0.4.tgz#4ee1aeb164b63d6a1bcc57ae4aa0b6e6fa7a3796"
   integrity sha1-TuGusWS2PWobzFeuSqC25vp6N5Y=
