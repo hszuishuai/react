@@ -11,13 +11,13 @@ class EventObj {
             ? this.task[eventName] || (this.task[eventName] = [])
             : this.Error(eventName, "eventName"); //
         // tslint:disable-next-line:no-unused-expression
-        this.task[eventName].some(fn => fn === cb) ? true : this.task[eventName].push(cb); //
+        this.task[eventName].some((fn) => fn === cb) ? true : this.task[eventName].push(cb); //
     }
 
     public $emit(eventName: string, ...arg: any): void {
         // let taskQueue;
         this.task[eventName] && this.task[eventName].length > 0
-            ? this.task[eventName].forEach(fn => fn(...arg))
+            ? this.task[eventName].forEach((fn) => fn(...arg))
             : false;
     }
 

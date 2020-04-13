@@ -77,7 +77,7 @@ const articleList: IArticleProps[] = [
         types: ["122", "222"],
         likes: 22,
         comments: 10,
-        articleUrl: "https://bbs.a9vg.com/uc_server/data/avatar/001/44/49/25_avatar_middle.jpg"
+        articleUrl: "https://bbs.a9vg.com/uc_server/data/avatar/001/44/49/25_avatar_middle.jpg",
     },
     {
         theme: "专栏",
@@ -87,8 +87,8 @@ const articleList: IArticleProps[] = [
         types: ["122", "222"],
         likes: 22,
         comments: 10,
-        articleUrl: ""
-    }
+        articleUrl: "",
+    },
 ];
 
 function Home(props: Props): JSX.Element {

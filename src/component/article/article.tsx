@@ -1,12 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styles from "./index.module.less";
 import { Button } from "antd";
 import { LikeOutlined, MessageOutlined } from "@ant-design/icons";
 import { IArticleProps } from "@type/index";
 
-export interface ArticleProps {
+export interface ArticleProps extends ArticlesProps {
     article: IArticleProps;
-    onClick: (id: number) => void;
     id: number;
 }
 export interface ArticlesProps {
@@ -17,7 +16,7 @@ export interface ArticlesProps {
 const Article: any = (props: ArticleProps) => {
     const { article, id } = props;
     const onClick: any = () => {
-        props.onClick(id);
+        props.handClick(id);
     };
     return (
         <div className={styles.article} onClick={onClick}>
@@ -50,14 +49,14 @@ const Article: any = (props: ArticleProps) => {
     );
 };
 
-const ArticleView: React.SFC<ArticlesProps> = props => {
+const ArticleView: React.SFC<ArticlesProps> = (props) => {
     const { articleList, handClick } = props;
     return (
-        <div>
+        <Fragment>
             {articleList.map((article: IArticleProps, index) => {
                 return <Article id={index} onClick={handClick} article={article} key={article.author} />;
             })}
-        </div>
+        </Fragment>
         // tslint:disable-next-line: object-literal-sort-keys
     );
 };
