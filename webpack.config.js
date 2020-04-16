@@ -1,21 +1,19 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {
-    CleanWebpackPlugin
-} = require('clean-webpack-plugin');
-const tsImportPluginFactory = require('ts-import-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const tsImportPluginFactory = require("ts-import-plugin");
 
 //master
 module.exports = {
-    mode: 'development', //"production" | "development" | "none"
-    entry: './src/index.tsx', //入口文件
+    mode: "development", //"production" | "development" | "none"
+    entry: "./src/index.tsx", //入口文件
     output: {
-        filename: 'bundle.[hash].js', //文件名
-        path: path.resolve(__dirname, '/dist'), //输出文件路径(绝对路径)
-        sourceMapFilename: '[name].js.map',
-        publicPath: '/',
+        filename: "bundle.[hash].js", //文件名
+        path: path.resolve(__dirname, "/dist"), //输出文件路径(绝对路径)
+        sourceMapFilename: "[name].js.map",
+        publicPath: "/",
     },
-    devtool: 'source-map',
+    devtool: "source-map",
     module: {
         //模块配置
         rules: [
@@ -23,15 +21,15 @@ module.exports = {
             //编译ts、tsx文件
             {
                 test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader',
+                loader: "awesome-typescript-loader",
                 options: {
                     getCustomTransformers: () => ({
                         before: [
                             tsImportPluginFactory({
                                 //配置antd组件库按需加载
-                                libraryName: 'antd',
-                                libraryDirectory: 'lib',
-                                style: 'css',
+                                libraryName: "antd",
+                                libraryDirectory: "lib",
+                                style: "css",
                             }),
                         ],
                     }),
@@ -42,36 +40,34 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    "style-loader",
                     {
-                        loader: 'css-loader',
+                        loader: "css-loader",
                         options: {
                             modules: true,
-                            localIdentName: '[hash:base64:6]'
-                        }
+                            localIdentName: "[hash:base64:6]",
+                        },
                     },
-                    'postcss-loader'
-                ]
+                    "postcss-loader",
+                ],
             },
             {
                 test: /\.scss$/,
-                use: [
-                    'style-loader', 'css-loader', 'sass-loader'
-                ],
+                use: ["style-loader", "css-loader", "sass-loader"],
                 exclude: /node_modules/,
             },
             //这个file-loader，暂时不用就去掉吧
             {
                 test: /\.(jpg|png|svg|ico|icns)$/,
-                loader: 'file-loader',
+                loader: "file-loader",
                 options: {
-                    name: '[path][name].[ext]',
+                    name: "[path][name].[ext]",
                 },
             },
             {
-                enforce: 'pre',
+                enforce: "pre",
                 test: /\.js$/,
-                loader: 'source-map-loader'
+                loader: "source-map-loader",
             },
         ],
     },
@@ -86,8 +82,8 @@ module.exports = {
         historyApiFallback: true, //任意的 404 响应都可能需要被替代为 index.html
         //跨域处理
         proxy: {
-            '/api/*': {
-                target: 'http://127.0.0.1',
+            "/api/*": {
+                target: "http://127.0.0.1",
                 secure: false,
                 changeOrigin: true,
             },
@@ -99,8 +95,8 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             inject: true,
-            template: 'index.html',
-            appMountId: 'app',
+            template: "index.html",
+            appMountId: "app",
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
@@ -108,4 +104,4 @@ module.exports = {
             },
         }),
     ],
-}
+};

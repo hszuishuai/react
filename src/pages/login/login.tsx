@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 import styles from "./login.module.css";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { observer, inject } from "mobx-react";
 import { IUser, ILoginParams } from "../../mobx/user/type";
 import { RouteComponentProps } from "react-router";
@@ -42,10 +42,10 @@ type IProps = Readonly<{
     user: IUser;
 }>;
 
-const LoginForm: React.SFC<IProps & RouteComponentProps> = props => {
+const LoginForm: React.SFC<IProps & RouteComponentProps> = (props) => {
     const { userInfo, Login } = props.user;
     const [Loading, setLoading] = useState<boolean>(false);
-    const History: any = useNavigate();
+    const History: any = useHistory();
     //当userInfo 发生变化的时候才会执行effect中的方法 [userInfo],
     useEffect(() => {
         console.log(props.user);
@@ -62,7 +62,7 @@ const LoginForm: React.SFC<IProps & RouteComponentProps> = props => {
     const onFinishFailed: any = () => {
         console.log("error");
     };
-    const handleSubmit: React.ReactEventHandler = e => {
+    const handleSubmit: React.ReactEventHandler = (e) => {
         e.preventDefault();
         setLoading(true);
         console.log("Received values of form: ", props.form);
@@ -71,7 +71,7 @@ const LoginForm: React.SFC<IProps & RouteComponentProps> = props => {
             const isLoginUserInfo: ILoginParams = {
                 username: values.username,
                 // tslint:disable-next-line: object-literal-sort-keys
-                password: values.password
+                password: values.password,
             };
             //const Login: any = login;
             if (!err) {
@@ -107,7 +107,7 @@ const LoginForm: React.SFC<IProps & RouteComponentProps> = props => {
                         htmlType="submit"
                         loading={Loading}
                         disabled={Loading}
-                        onClick={e => handleSubmit(e)}
+                        onClick={(e) => handleSubmit(e)}
                         className={styles.login_form_button}
                     >
                         {" "}

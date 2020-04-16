@@ -17,36 +17,35 @@ const routeList: IRouter[] = [
             {
                 component: lazy(() => import("@/pages/books")),
                 exact: false,
-                path: "/home/books"
+                path: "/home/books",
             },
             {
                 component: lazy(() => import("@/pages/pins")),
                 exact: false,
-                path: "/home/pins"
+                path: "/home/pins",
             },
             {
                 component: lazy(() => import("@/pages/topics")),
                 exact: false,
-                path: "/home/topics"
-            }
-        ]
-
+                path: "/home/topics",
+            },
+        ],
     },
     {
         component: lazy(() => import("../App")),
         path: "/",
-        exact: true
+        exact: true,
     },
     {
         component: lazy(() => import("@/pages/post")),
         path: "/post/:id",
-        exact: false
+        exact: false,
     },
     {
         component: lazy(() => import("@/App")),
         path: "/app",
-        exact: false
-    }
+        exact: false,
+    },
 ];
 
 export default routeList;

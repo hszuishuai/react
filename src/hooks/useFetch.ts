@@ -1,4 +1,4 @@
-import { useState, useCallback, DependencyList } from "react";
+import { useState, useCallback, DependencyList, useEffect } from "react";
 import useMountState from "./useMountState";
 
 export type TFetch<T> = {
@@ -10,9 +10,10 @@ export type TFetch<T> = {
 
 export default function useFetch<Result = any, Args extends any[] = any[]>(
     fetchFn: (...args: Args | []) => Promise<Result>,
+    immediate: Boolean = false,
     deps: DependencyList = []
-): TFetch<any> {
-    const [loading, setLoading] = useState<Boolean>(false);
+): TFetch<Result> {
+    const [loading, setLoading] = useState<Boolean>(true);
     const [error, setError] = useState();
     const [data, setData] = useState();
     const isMounted: () => Boolean = useMountState();
@@ -30,6 +31,12 @@ export default function useFetch<Result = any, Args extends any[] = any[]>(
         }
         isMounted() && setLoading(false);
     }, deps);
+
+    useEffect(() => {
+        if (immediate) {
+            loadData();
+        }
+    }, [loadData]);
 
     return { data, loading, error, loadData };
 }

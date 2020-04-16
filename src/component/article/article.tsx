@@ -1,15 +1,17 @@
 import React, { Fragment } from "react";
 import styles from "./index.module.less";
+import { Link } from "react-router-dom";
 import { Button } from "antd";
 import { LikeOutlined, MessageOutlined } from "@ant-design/icons";
-import { IArticleProps } from "@type/index";
+import { IArticle, INode, ITag } from "@type/index";
+import { formDate } from "@/lib/utils";
 
 export interface ArticleProps extends ArticlesProps {
-    article: IArticleProps;
+    article: INode;
     id: number;
 }
 export interface ArticlesProps {
-    articleList: Array<IArticleProps>;
+    articleList: Array<IArticle>;
     handClick: (index: number) => void;
 }
 
@@ -18,14 +20,30 @@ const Article: any = (props: ArticleProps) => {
     const onClick: any = () => {
         props.handClick(id);
     };
+
+    const renderTags: any = (tags: Array<ITag>) => {
+        return tags.map((tag: ITag, index) => {
+            return (
+                <span key={tag.id} className={styles.tags}>
+                    <Link to="/home">{tag.title}</Link>
+                </span>
+            );
+        });
+    };
     return (
         <div className={styles.article} onClick={onClick}>
             <div className={styles.article__body}>
                 <div className={`${styles.article__top} `}>
-                    <span className={`${styles.article__top__item} ${styles.post}`}>{article.theme}</span>
-                    <span className={styles.article__top__item}>{article.author}</span>
-                    <span className={styles.article__top__item}>{article.releaseTime}</span>
-                    <span className={styles.article__top__item}>java</span>
+                    <div className={`${styles.article__top__item}`}>
+                        <span className={styles.post}>{article.type}</span>
+                    </div>
+                    <div className={styles.article__top__item}>
+                        <span>{article.user.username}</span>
+                    </div>
+                    <div className={styles.article__top__item}>
+                        <span>{formDate(article.createdAt)}前</span>
+                    </div>
+                    <div className={styles.article__top__item}>{renderTags(article.tags)}</div>
                 </div>
                 <div className={styles.article__title}>
                     {/* <span className={styles.article__title--icon}></span> */}
@@ -36,25 +54,26 @@ const Article: any = (props: ArticleProps) => {
                 <Button.Group>
                     <Button type="primary" className={styles.article__title__button}>
                         <LikeOutlined />
-                        {article.likes}
+                        {article.likeCount}
                     </Button>
                     <Button type="primary" className={styles.article__title__button}>
                         <MessageOutlined />
-                        {article.comments}
+                        {article.commentsCount}
                     </Button>
                 </Button.Group>
             </div>
-            {article.articleUrl !== "" && <img className={styles.article__img} src={article.articleUrl} alt="title" />}
+            {article.screenshot !== "" && <img className={styles.article__img} src={article.screenshot} alt="title" />}
         </div>
     );
 };
 
 const ArticleView: React.SFC<ArticlesProps> = (props) => {
     const { articleList, handClick } = props;
+    console.log(articleList);
     return (
         <Fragment>
-            {articleList.map((article: IArticleProps, index) => {
-                return <Article id={index} onClick={handClick} article={article} key={article.author} />;
+            {articleList.map((article, index) => {
+                return <Article id={index} onClick={handClick} article={article.node} key={article.node.id} />;
             })}
         </Fragment>
         // tslint:disable-next-line: object-literal-sort-keys

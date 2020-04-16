@@ -2,6 +2,8 @@ import axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from "axios";
 axios.defaults.timeout = 10000;
 axios.defaults.withCredentials = true;
 
+axios.defaults.headers["X-Agent"] = "Juejin/Web";
+
 axios.interceptors.request.use(
     (config: AxiosRequestConfig) => {
         //发送请求操作，统一再请求里加上userId;
@@ -12,13 +14,14 @@ axios.interceptors.request.use(
         //发送请求错误操作
         console.log("请求失败");
         return Promise.reject(error);
-    });
+    }
+);
 
 axios.interceptors.response.use(
     (response: AxiosResponse) => {
         //对响应数据做操作
         // console.log(response)
-        if (parseInt(response.data.err, 10) <= 2000000) {
+        if (response.data) {
             //console.log('请求成功');
             return response;
         }
@@ -36,6 +39,7 @@ axios.interceptors.response.use(
         //对响应数据错误做操作
         console.log("请求error", error.message);
         return Promise.reject(error);
-    });
+    }
+);
 
 export default axios;
