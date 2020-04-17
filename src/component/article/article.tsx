@@ -22,7 +22,7 @@ const Article: any = (props: ArticleProps) => {
     };
 
     const renderTags: any = (tags: Array<ITag>) => {
-        return tags.map((tag: ITag, index) => {
+        return tags.map((tag: ITag) => {
             return (
                 <span key={tag.id} className={styles.tags}>
                     <Link to="/home">{tag.title}</Link>
@@ -35,7 +35,7 @@ const Article: any = (props: ArticleProps) => {
             <div className={styles.article__body}>
                 <div className={`${styles.article__top} `}>
                     <div className={`${styles.article__top__item}`}>
-                        <span className={styles.post}>{article.type}</span>
+                        <span className={styles.post}>专栏</span>
                     </div>
                     <div className={styles.article__top__item}>
                         <span>{article.user.username}</span>

@@ -2,6 +2,9 @@
 import React, { useState, memo, useMemo, useCallback } from "react";
 
 import { IOnclick } from "../typing";
+import axios from "axios";
+import "@/mock";
+
 // redux
 // import { connect } from "react-redux";
 import Children from "@/component/Children";
@@ -23,10 +26,10 @@ const useToggle: any = (initValue?: boolean) => {
 //react-Hooks
 const MemoChildren: any = memo(Children);
 
-const App: React.SFC<IState> = props => {
+const App: React.SFC<IState> = (props) => {
     const [state, setState] = useState<IState>({
         child: undefined,
-        msg: "这是信息"
+        msg: "这是信息",
     });
     const [count, setCount] = useState(0);
     const { msg, child } = state;
@@ -35,7 +38,7 @@ const App: React.SFC<IState> = props => {
     console.log(enable);
     //useCallback的使用--------------优化子组件的重复渲染
     //使用 useState 避免数据的错乱
-    const getMsg: (Msg: string) => Promise<void> = async Msg => {
+    const getMsg: (Msg: string) => Promise<void> = async (Msg) => {
         // setChild( childe)
         await setState(
             (pevState): IState => {
@@ -51,7 +54,7 @@ const App: React.SFC<IState> = props => {
         <div className="App">
             <div>react</div>
             {/* <MemoChildren  news={msg} /> */}
-            <MemoChildren news={useMemo(() => msg, [msg])} setMsg={useCallback(Msg => getMsg(Msg), [])} />
+            <MemoChildren news={useMemo(() => msg, [msg])} setMsg={useCallback((Msg) => getMsg(Msg), [])} />
             <h1>{child}</h1>
             <p>{count}</p>
             <p>{enable}</p>

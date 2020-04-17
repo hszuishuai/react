@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // import NavigationBar from "../../component/navigationBar";
-import styles from "./Home.module.css";
+import styles from "./Home.module.less";
 import ArticleView from "@/component/article/article";
 import { IArticles } from "@type/index";
 
@@ -90,7 +90,9 @@ function Home(props: Props): JSX.Element {
     return (
         <div className={styles.home}>
             {/* {loading } */}
-            {data.data && <ArticleView handClick={handClick} articleList={data.data.articleFeed.items.edges} />}
+            <div className={styles.home__main}>
+                {data.data && <ArticleView handClick={handClick} articleList={data.data.articleFeed.items.edges} />}
+            </div>
         </div>
     );
 }

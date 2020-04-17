@@ -46,4 +46,8 @@ const getArticle: IPromise<any> = () => {
     });
 };
 
+const getTags: IPromise<any> = () => {
+    return axios.post("")
+}
+
 export { login, getArticle };

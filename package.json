@@ -2,7 +2,6 @@
     "name": "react-test",
     "version": "0.1.0",
     "private": true,
-    "proxy": "https://web-api.juejin.im",
     "config-overrides-path": "config/config-overrides.js",
     "dependencies": {
         "@types/axios": "^0.14.0",
@@ -24,6 +23,7 @@
         "mobx": "^5.14.0",
         "mobx-react": "^6.1.3",
         "mobx-react-router": "^4.0.7",
+        "mockjs": "^1.1.0",
         "qrcode": "^1.4.4",
         "react": "^16.12.0",
         "react-app-rewired": "^2.1.5",
