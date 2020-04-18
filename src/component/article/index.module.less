@@ -31,17 +31,12 @@
     display: flex;
     line-height: 1;
     justify-content: flex-start;
+    align-items: baseline;
     color: @text_color3;
     .article__top__item {
-        display: flex;
-        align-items: baseline;
-        font-size: 12px;
-        line-height: 1;
-        span {
-            display: inline-block;
-        }
+        font-size: 14px;
         &:not(:last-child):after {
-            content: ".";
+            content: "·";
             color: #ccc;
             margin: 0 0.4rem;
         }
