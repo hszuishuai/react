@@ -60,7 +60,5 @@ type Fun<T> = {
     [p in keyof T]: T[p] extends Function ? p : never;
 }[keyof T];
 
-function aa(): Fun<IUser> {
-    return () => {};
-}
+
 

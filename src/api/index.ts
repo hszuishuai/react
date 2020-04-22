@@ -29,25 +29,26 @@ const login: IFunc<ILoginParams> = (params) => {
 };
 
 /**
- *  掘金接口
+ *
+ * @param category  类型id
  */
 
-const getArticle: IPromise<any> = () => {
+const getArticle: any = (category: string = "") => {
     return axios.post(`/api/query`, {
         operationName: "",
         query: "",
-        variables: { first: 20, after: "", order: "POPULAR" },
+        variables: { tags: [], category, first: 20, after: "", order: "POPULAR" },
         first: 20,
         after: "",
         order: "POPULAR",
         extensions: {
-            query: { id: "21207e9ddb1de777adeaca7a2fb38030" },
+            query: { id: category === "" ? "21207e9ddb1de777adeaca7a2fb38030" : "653b587c5c7c8a00ddf67fc66f989d42" },
         },
     });
 };
 
 const getTags: IPromise<any> = () => {
-    return axios.post("")
-}
+    return axios.post("");
+};
 
 export { login, getArticle };

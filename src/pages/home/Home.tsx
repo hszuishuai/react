@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 // import NavigationBar from "../../component/navigationBar";
 import styles from "./Home.module.less";
 import ArticleView from "@/component/article/article";
-import { IArticles } from "@type/index";
 
 import { getArticle } from "@/api";
+
+import Nav from "@/component/navigate";
 
 //import useMountState from "@/hooks/useMountState";
 import useFetch from "@/hooks/useFetch";
@@ -74,21 +75,26 @@ export interface IndexRouter {
 
 function Home(props: Props): JSX.Element {
     const History: any = useHistory();
+    const Location: any = useLocation();
 
-    const { loading, data } = useFetch<any>(getArticle, true);
+    const { loading, data, loadData } = useFetch<any>(getArticle, false);
+
+    useEffect(() => {
+        loadData(Location.state.id);
+    }, [Location.state.id]);
 
     const handClick: any = (id: number) => {
         console.log(id);
         // navigate(`/post/${id}`);
     };
-    console.log(loading);
-    console.log(data);
+
     if (loading) {
         return <div>正在加载</div>;
     }
 
     return (
         <div className={styles.home}>
+            <Nav />
             {/* {loading } */}
             <div className={styles.home__main}>
                 {data.data && <ArticleView handClick={handClick} articleList={data.data.articleFeed.items.edges} />}

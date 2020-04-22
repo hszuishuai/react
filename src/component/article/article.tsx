@@ -63,7 +63,6 @@ const Article: any = (props: ArticleProps) => {
 
 const ArticleView: React.SFC<ArticlesProps> = (props) => {
     const { articleList, handClick } = props;
-    console.log(articleList);
     return (
         <Fragment>
             {articleList.map((article, index) => {

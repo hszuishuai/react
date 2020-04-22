@@ -5,7 +5,7 @@ export type TFetch<T> = {
     data?: T | undefined;
     loading: Boolean;
     error?: undefined | Error;
-    loadData: () => Promise<T>;
+    loadData: (params: T) => Promise<T>;
 };
 
 export default function useFetch<Result = any, Args extends any[] = any[]>(
