@@ -15,6 +15,11 @@ import { ILoginParams } from "../mobx/user/type";
 // 	}
 // }
 
+const JUEJINAPI_CONFIG: Object = {
+    CATEGORY_ID: "653b587c5c7c8a00ddf67fc66f989d42",
+    DEFAULT_ID: "21207e9ddb1de777adeaca7a2fb38030",
+};
+
 type IPromise<T> = {
     (): Promise<AxiosResponse<T>>;
 };
@@ -42,7 +47,7 @@ const getArticle: any = (category: string = "") => {
         after: "",
         order: "POPULAR",
         extensions: {
-            query: { id: category === "" ? "21207e9ddb1de777adeaca7a2fb38030" : "653b587c5c7c8a00ddf67fc66f989d42" },
+            query: { id: category === "" ? JUEJINAPI_CONFIG.DEFAULT_ID : JUEJINAPI_CONFIG.CATEGORY_ID },
         },
     });
 };
