@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import React from "react";
+//import { useHistory, useLocation } from "react-router-dom";
 // import NavigationBar from "../../component/navigationBar";
 import styles from "./Home.module.less";
-import ArticleView from "@/component/article/article";
+//import ArticleView from "@/component/article/article";
 
-import { getArticle } from "@/api";
+//import { getArticle } from "@/api";
 
 import Nav from "@/component/navigate";
+import HomeContainer from "./HomeContainer";
 
 //import useMountState from "@/hooks/useMountState";
-import useFetch from "@/hooks/useFetch";
+//import useFetch from "@/hooks/useFetch";
 
 /**
  * @redux
@@ -74,31 +75,32 @@ export interface IndexRouter {
 }
 
 function Home(props: Props): JSX.Element {
-    const History: any = useHistory();
-    const Location: any = useLocation();
+    // const History: any = useHistory();
+    // const Location: any = useLocation();
 
-    const { loading, data, loadData } = useFetch<any>(getArticle, false);
+    // const { loading, data, loadData } = useFetch<any>(getArticle, false);
 
-    useEffect(() => {
-        loadData(Location.state.id);
-    }, [Location.state.id]);
+    // useEffect(() => {
+    //     loadData(Location.state.id);
+    // }, [Location.state.id]);
 
-    const handClick: any = (id: number) => {
-        console.log(id);
-        // navigate(`/post/${id}`);
-    };
+    // const handClick: any = (id: number) => {
+    //     console.log(id);
+    //     // navigate(`/post/${id}`);
+    // };
 
-    if (loading) {
-        return <div>正在加载</div>;
-    }
+    // if (loading) {
+    //     return <div>正在加载</div>;
+    // }
 
     return (
         <div className={styles.home}>
             <Nav />
+            <HomeContainer />
             {/* {loading } */}
-            <div className={styles.home__main}>
+            {/* <div className={styles.home__main}>
                 {data.data && <ArticleView handClick={handClick} articleList={data.data.articleFeed.items.edges} />}
-            </div>
+            </div> */}
         </div>
     );
 }

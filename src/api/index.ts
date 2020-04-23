@@ -51,4 +51,4 @@ const getTags: IPromise<any> = () => {
     return axios.post("");
 };
 
-export { login, getArticle };
+export { login, getArticle, getTags };

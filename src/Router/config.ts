@@ -5,7 +5,7 @@ import { categoryList } from "@/mock/data";
 const homeRouter: any = categoryList.items.map((category: any) => {
     const homeRoute: any = {};
     homeRoute.exact = false;
-    homeRoute.component = lazy(() => import("@/pages/home/Home"));
+    homeRoute.component = lazy(() => import("@/pages/post"));
     homeRoute.path = category.path;
     return homeRoute;
 });

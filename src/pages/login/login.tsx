@@ -59,9 +59,9 @@ const LoginForm: React.SFC<IProps & RouteComponentProps> = (props) => {
         };
     }, [userInfo, History, props.user]);
 
-    const onFinishFailed: any = () => {
-        console.log("error");
-    };
+    // const onFinishFailed: any = () => {
+    //     console.log("error");
+    // };
     const handleSubmit: React.ReactEventHandler = (e) => {
         e.preventDefault();
         setLoading(true);

@@ -2,7 +2,6 @@
 import React, { useState, memo, useMemo, useCallback } from "react";
 
 import { IOnclick } from "../typing";
-import axios from "axios";
 import "@/mock";
 
 // redux
