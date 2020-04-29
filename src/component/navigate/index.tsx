@@ -9,19 +9,21 @@ import { NavLink } from "react-router-dom";
 
 const Navigate: React.SFC<any> = () => {
     return (
-        <nav className={styles.view__nav}>
-            <ul className={styles.nav__list}>
-                {categoryList.items.map((category: any) => {
-                    return (
-                        <li key={category.id} className={styles.nav__item}>
-                            <NavLink to={category.path} activeClassName={styles.active}>
-                                {category.category}
-                            </NavLink>
-                        </li>
-                    );
-                })}
-            </ul>
-        </nav>
+        <div className={styles.main__header}>
+            <nav className={styles.view__nav}>
+                <ul className={styles.nav__list}>
+                    {categoryList.items.map((category: any) => {
+                        return (
+                            <li key={category.id} className={styles.nav__item}>
+                                <NavLink to={category.path} activeClassName={styles.active}>
+                                    {category.category}
+                                </NavLink>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </nav>
+        </div>
     );
 };
 
