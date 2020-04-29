@@ -5,8 +5,8 @@ import { categoryList } from "@/mock/data";
 const homeRouter: any = categoryList.items.map((category: any) => {
     const homeRoute: any = {};
     homeRoute.exact = false;
-    homeRoute.component = lazy(() => import("@/pages/post"));
-    homeRoute.path = category.path;
+    homeRoute.component = lazy(() => import("@/pages/home/Home"));
+    homeRoute.path = "/home/:type";
     return homeRoute;
 });
 
@@ -19,7 +19,7 @@ export interface IRouter {
 const routeList: IRouter[] = [
     {
         component: lazy(() => import("../pages/home/Home")),
-        path: "/home",
+        path: "/home/:type",
         // tslint:disable-next-line: object-literal-sort-keys
         exact: false,
         children: homeRouter,

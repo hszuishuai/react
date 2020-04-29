@@ -1,3 +1,13 @@
+export interface ICategory {
+    id: string;
+    category: string;
+    path: string;
+}
+
+export interface ICategoryList {
+    items: Array<ICategory>;
+}
+
 const categoryList: any = {
     items: [
         {

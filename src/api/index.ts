@@ -15,7 +15,7 @@ import { ILoginParams } from "../mobx/user/type";
 // 	}
 // }
 
-const JUEJINAPI_CONFIG: Object = {
+const JUEJINAPI_CONFIG: any = {
     CATEGORY_ID: "653b587c5c7c8a00ddf67fc66f989d42",
     DEFAULT_ID: "21207e9ddb1de777adeaca7a2fb38030",
 };

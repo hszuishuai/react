@@ -1,19 +1,23 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-// import NavigationBar from "../../component/navigationBar";
+import { categoryList, ICategory } from "@/mock/data";
+import Tags from "@/component/tags";
 import styles from "./Home.module.less";
 import ArticleView from "@/component/article/article";
 import useFetch from "@/hooks/useFetch";
 import { getArticle } from "@/api";
 
 const HomeContainer: React.FC<any> = () => {
-    const Location: any = useLocation();
+    const { pathname } = useLocation();
 
     const { loading, data, loadData } = useFetch<any>(getArticle, false);
 
     useEffect(() => {
-        loadData(Location.state.id);
-    }, [Location.state.id]);
+        //console.log(type);
+        const params: Array<ICategory> = categoryList.items.filter((c: ICategory) => c.path === pathname);
+        console.log(params);
+        loadData(params[0].id);
+    }, [pathname]);
 
     const handClick: any = (id: number) => {
         console.log(id);
@@ -25,6 +29,7 @@ const HomeContainer: React.FC<any> = () => {
     }
     return (
         <div className={styles.home__main}>
+            <Tags />
             {data.data && <ArticleView handClick={handClick} articleList={data.data.articleFeed.items.edges} />}
         </div>
     );

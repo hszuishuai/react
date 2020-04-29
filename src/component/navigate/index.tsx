@@ -1,11 +1,10 @@
 import * as React from "react";
-
 //import classNames from "classnames";
 
 import { categoryList } from "../../mock/data";
 import styles from "./index.module.less";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 //import styles from "./navigate.module.less";
 
 const Navigate: React.SFC<any> = () => {
@@ -15,16 +14,9 @@ const Navigate: React.SFC<any> = () => {
                 {categoryList.items.map((category: any) => {
                     return (
                         <li key={category.id} className={styles.nav__item}>
-                            <Link
-                                to={{
-                                    pathname: category.path,
-                                    state: {
-                                        id: category.id,
-                                    },
-                                }}
-                            >
+                            <NavLink to={category.path} activeClassName={styles.active}>
                                 {category.category}
-                            </Link>
+                            </NavLink>
                         </li>
                     );
                 })}
