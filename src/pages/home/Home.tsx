@@ -6,7 +6,7 @@ import styles from "./Home.module.less";
 
 //import { getArticle } from "@/api";
 
-import Nav from "@/component/navigate";
+import Nav from "@/components/navigate";
 import HomeContainer from "./HomeContainer";
 
 //import useMountState from "@/hooks/useMountState";

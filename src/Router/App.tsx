@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch, RouteComponentProps, Redirect } from "react-router-dom";
-import Loading from "@/component/loading";
+import Loading from "@/components/loading";
 //import AuthRouter from "@/component/AuthRouter";
 import Login from "@/pages/login/login";
 import RouterList, { IRouter } from "./config";

@@ -6,7 +6,7 @@ import "@/mock";
 
 // redux
 // import { connect } from "react-redux";
-import Children from "@/component/Children";
+import Children from "@/components/Children";
 import { _UserInfo } from "@/lib/Storage";
 
 interface IState {

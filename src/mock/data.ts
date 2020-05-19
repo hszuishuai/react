@@ -13,7 +13,7 @@ const categoryList: any = {
         {
             id: "",
             category: "推荐",
-            path: "/home",
+            path: "/home/recommended",
         },
         {
             id: "5562b419e4b00c57d9b94ae2",

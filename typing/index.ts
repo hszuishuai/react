@@ -51,6 +51,12 @@ export interface INode {
     updatedAt: String;
 }
 
+/**
+ * 文章tag类型接口
+ */
+// export interface ITagNav {
+//     items: Array<ITag>;
+// }
 export interface IArticle {
     node: INode;
 }

@@ -19,6 +19,7 @@ const JUEJINAPI_CONFIG: any = {
     CATEGORY_ID: "653b587c5c7c8a00ddf67fc66f989d42",
     DEFAULT_ID: "21207e9ddb1de777adeaca7a2fb38030",
 };
+const TAG_QUERY_ID: string = "801e22bdc908798e1c828ba6b71a9fd9";
 
 type IPromise<T> = {
     (): Promise<AxiosResponse<T>>;
@@ -52,8 +53,13 @@ const getArticle: any = (category: string = "") => {
     });
 };
 
-const getTags: IPromise<any> = () => {
-    return axios.post("");
+const getTags: any = (category: string) => {
+    return axios.post("/api/query", {
+        extensions: { query: { id: TAG_QUERY_ID } },
+        operationName: "",
+        query: "",
+        variables: { category: category, limit: 15 },
+    });
 };
 
 export { login, getArticle, getTags };
