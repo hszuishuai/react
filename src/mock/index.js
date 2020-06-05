@@ -1,7 +1,7 @@
 import { categoryList } from "./data";
 
-const Mock = require("mockjs");
+// const Mock = require("mockjs");
 
-const category = Mock.mock("/mock", "get", categoryList);
+// const category = Mock.mock("/mock", "get", categoryList);
 
-export default category;
+// export default category;

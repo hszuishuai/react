@@ -9,6 +9,9 @@ import styles from "./Home.module.less";
 import Nav from "@/components/navigate";
 import HomeContainer from "./HomeContainer";
 
+//初始化数据
+import useDataInit from "./hook/useDataInit";
+
 //import useMountState from "@/hooks/useMountState";
 //import useFetch from "@/hooks/useFetch";
 
@@ -28,7 +31,7 @@ import HomeContainer from "./HomeContainer";
 /**
  * @mobx
  */
-import { observer, inject } from "mobx-react";
+//import { observer, inject } from "mobx-react";
 //import { IStore } from "MobxStore";
 
 //import { withRouter } from "react-router-dom";
@@ -75,32 +78,12 @@ export interface IndexRouter {
 }
 
 function Home(props: Props): JSX.Element {
-    // const History: any = useHistory();
-    // const Location: any = useLocation();
-
-    // const { loading, data, loadData } = useFetch<any>(getArticle, false);
-
-    // useEffect(() => {
-    //     loadData(Location.state.id);
-    // }, [Location.state.id]);
-
-    // const handClick: any = (id: number) => {
-    //     console.log(id);
-    //     // navigate(`/post/${id}`);
-    // };
-
-    // if (loading) {
-    //     return <div>正在加载</div>;
-    // }
+    const { forMateHomeData } = useDataInit();
 
     return (
         <div className={styles.home}>
             <Nav />
-            <HomeContainer />
-            {/* {loading } */}
-            {/* <div className={styles.home__main}>
-                {data.data && <ArticleView handClick={handClick} articleList={data.data.articleFeed.items.edges} />}
-            </div> */}
+            <HomeContainer {...forMateHomeData} />
         </div>
     );
 }
@@ -123,5 +106,5 @@ const moduleHome: any = connect(
 */
 
 // mobx
-const moduleHome: any = inject("store")(observer(Home));
-export default moduleHome;
+//const moduleHome: any = inject("store")(observer(Home));
+export default Home;

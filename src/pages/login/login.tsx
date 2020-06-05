@@ -4,7 +4,7 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 import styles from "./login.module.css";
 import { useHistory } from "react-router-dom";
-import { observer, inject } from "mobx-react";
+//import { observer, inject } from "mobx-react";
 import { IUser, ILoginParams } from "../../mobx/user/type";
 import { RouteComponentProps } from "react-router";
 //import Loading from "./loading"
@@ -129,7 +129,7 @@ const storeLoginForm: any = connect(
 )(LoginForm);
 */
 
-const storeLoginForm: React.SFC<any> = inject("user")(observer(LoginForm));
+//const storeLoginForm: React.SFC<any> = inject("user")(observer(LoginForm));
 //const FromComponent: any = Form.create({"name: 'normal_login"})(storeLoginForm);
 
-export default storeLoginForm;
+export default LoginForm;

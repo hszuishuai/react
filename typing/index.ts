@@ -10,13 +10,26 @@ export interface IRouter extends RouteComponentProps {
     children?: Array<any>;
 }
 
+/**
+ *  文章标签接口
+ */
 export interface ITag {
     id: string;
     title: String;
 }
 
 /**
- * 文章接口数据
+ * 文章标签的请求接口返回的数据类型
+ */
+
+export interface ITagNav {
+    tagNav: {
+        items: Array<ITag>;
+    };
+}
+
+/**
+ * 文章接口Node数据
  */
 export interface INode {
     id: String;
@@ -54,9 +67,6 @@ export interface INode {
 /**
  * 文章tag类型接口
  */
-// export interface ITagNav {
-//     items: Array<ITag>;
-// }
 export interface IArticle {
     node: INode;
 }
@@ -65,11 +75,22 @@ export interface IPageInfo {
     endCursor: String;
 }
 
+/**
+ *  文章数组接口
+ */
 export interface IArticles {
     edges: Array<IArticle>;
     pageInfo: IPageInfo;
 }
 
+/**
+ * 请求的articleFeed接口返回的数据
+ */
+export interface IArticleFeed {
+    articleFeed: {
+        items: IArticles;
+    };
+}
 export interface IOnclick<T> {
     (e?: T): void;
 }

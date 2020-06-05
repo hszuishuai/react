@@ -23,12 +23,13 @@ axios.interceptors.response.use(
         // console.log(response)
         if (response.data) {
             //console.log('请求成功');
-            return response;
+            return response.data;
         }
         if (response.data.code === "2000401" || response.data.code === 2000401) {
             console.log("已过期重新登陆", response.data.code);
             window.location.href = "/login";
-            return Promise.reject(response);
+            console.log(response.data);
+            return Promise.reject(response.data);
         } else {
             console.log("请求失败", response.data.code);
             // alert(response.data.message);

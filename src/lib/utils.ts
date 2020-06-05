@@ -1,3 +1,5 @@
+import { IArticles, ITag, IArticleFeed, ITagNav } from "../../typing";
+
 /**
  *
  * @param utc_time  2020-04-16T03:29:16.044Z
@@ -40,4 +42,20 @@ function formDate(utc_time: String): any {
     return `${minute}分钟`;
 }
 
-export { formDate };
+/**
+ *  格式化文章接口数据
+ * @param articles // IArticleFeed
+ */
+function forMateArticles(articles: IArticleFeed): IArticles {
+    return articles.articleFeed.items;
+}
+
+/**
+ * 格式化文章标签
+ * @param tags  // ITagNav
+ */
+function forMateTags(tags: ITagNav): Array<ITag> {
+    return tags.tagNav.items;
+}
+
+export { formDate, forMateArticles, forMateTags };

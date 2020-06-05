@@ -18,25 +18,28 @@ export default function useFetch<Result = any, Args extends any[] = any[]>(
     const [data, setData] = useState();
     const isMounted: () => Boolean = useMountState();
 
-    const loadData: any = useCallback(async (...args: Args | []) => {
-        setLoading(true);
-        try {
-            const res: any = await fetchFn(...args);
-            /**
-             * isMounted的作用 确保组件已经加载完成 在修改state状态。 防止因为异步请求还未完成,组件意外卸载导出报错。
-             */
-            isMounted() && setData(res.data);
-        } catch (e) {
-            isMounted() && setError(e);
-        }
-        isMounted() && setLoading(false);
-    }, deps);
+    const loadData: any = useCallback(
+        async (...args: Args | []) => {
+            setLoading(true);
+            try {
+                const res: any = await fetchFn(...args);
+                /**
+                 * isMounted的作用 确保组件已经加载完成 在修改state状态。 防止因为异步请求还未完成,组件意外卸载导出报错。
+                 */
+                isMounted() && setData(res.data);
+            } catch (e) {
+                isMounted() && setError(e);
+            }
+            isMounted() && setLoading(false);
+        },
+        [fetchFn, isMounted]
+    );
 
     useEffect(() => {
         if (immediate) {
             loadData();
         }
-    }, [loadData]);
+    }, [immediate, loadData]);
 
     return { data, loading, error, loadData };
 }

@@ -13,6 +13,7 @@ const o: IObj<IFor> = {
 };
 
 //infer 推断类型
+type Aa = keyof IObj<IFor>;
 
 type IInfer<T> = T extends (params: infer p) => any ? p : number;
 
