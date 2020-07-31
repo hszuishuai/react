@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useRef, RefObject } from "react";
 //import { useHistory, useLocation } from "react-router-dom";
 // import NavigationBar from "../../component/navigationBar";
 import styles from "./Home.module.less";
@@ -11,6 +11,7 @@ import HomeContainer from "./HomeContainer";
 
 //初始化数据
 import useDataInit from "./hook/useDataInit";
+import useObserve from "@/hooks/useObserve";
 
 //import useMountState from "@/hooks/useMountState";
 //import useFetch from "@/hooks/useFetch";
@@ -78,10 +79,17 @@ export interface IndexRouter {
 }
 
 function Home(props: Props): JSX.Element {
-    const { forMateHomeData } = useDataInit();
+    const { forMateHomeData } = useDataInit(
+        useCallback((error: string) => {
+            console.log(error);
+        }, [])
+    );
+
+    const [ref] = useObserve<HTMLDivElement>();
+    console.log(ref);
 
     return (
-        <div className={styles.home}>
+        <div className={styles.home} ref={ref}>
             <Nav />
             <HomeContainer {...forMateHomeData} />
         </div>

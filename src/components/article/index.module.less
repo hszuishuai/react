@@ -8,17 +8,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 
-    .article__body {
+    &__body {
         display: flex;
         flex-direction: column;
         flex: 1;
     }
 
-    .article__img {
+    &__img {
         width: 80px;
         height: 80px;
         object-fit: cover;
+    }
+    &:hover {
+        background-color: #f4f4f0;
     }
 }
 
@@ -33,7 +37,7 @@
     justify-content: flex-start;
     align-items: baseline;
     color: @text_color3;
-    .article__top__item {
+    &__item {
         font-size: 14px;
         &:not(:last-child):after {
             content: "·";

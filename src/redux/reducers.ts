@@ -1,27 +1,27 @@
 import { CHANGE_COUNT, SET_USERINFO } from "./actionTypes";
-import {
-    _UserInfo,
-} from "../lib/Storage";
+import { _UserInfo } from "../lib/Storage";
 import { createReducer } from "typesafe-actions";
 
 import { setUserInfo, changeCount } from "./actions";
 
 interface IState {
     count: Number;
-    userInfo: (object | undefined);
+    userInfo: object | undefined;
 }
 const initState: IState = {
     count: 1,
-    userInfo: _UserInfo.getData()
+    userInfo: _UserInfo.getData(),
 };
 
-const Reducer: any = createReducer(initState).handleAction(setUserInfo, (state, action) => {
-    _UserInfo.save(action.payload.userInfo);  //将用户信息存入stoarge
-    return { ...state, userInfo: action.payload.userInfo };
-}).handleAction([CHANGE_COUNT], (state, action) => {
-    console.log(state, action);
-    return { ...state, count: action.payload.count + state.count };
-});
+const Reducer: any = createReducer(initState)
+    .handleAction(setUserInfo, (state, action) => {
+        _UserInfo.save(action.payload.userInfo); //将用户信息存入stoarge
+        return { ...state, userInfo: action.payload.userInfo };
+    })
+    .handleAction([CHANGE_COUNT], (state, action) => {
+        console.log(state, action);
+        return { ...state, count: action.payload.count + state.count };
+    });
 
 // const initState = {
 //     count: 1,

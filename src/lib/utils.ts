@@ -58,4 +58,22 @@ function forMateTags(tags: ITagNav): Array<ITag> {
     return tags.tagNav.items;
 }
 
-export { formDate, forMateArticles, forMateTags };
+/**
+ * 获取url参数
+ */
+
+function getUrlParams(search: string): object {
+    if (search) {
+        //console.log("search", search);
+        const paramsStr: string = search.slice(1, search.length);
+        const paramsArr: Array<string> = paramsStr.split("&");
+        const params: object = paramsArr.reduce((current, item) => {
+            const paramItemArr: Array<string> = item.split("=");
+            return { ...current, [paramItemArr[0]]: paramItemArr[1] };
+        }, {});
+        return params;
+    }
+    return {};
+}
+
+export { formDate, forMateArticles, forMateTags, getUrlParams };

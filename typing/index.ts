@@ -21,7 +21,6 @@ export interface ITag {
 /**
  * 文章标签的请求接口返回的数据类型
  */
-
 export interface ITagNav {
     tagNav: {
         items: Array<ITag>;

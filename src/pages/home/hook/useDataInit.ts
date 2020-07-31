@@ -3,30 +3,33 @@ import { getArticle, getTags } from "@/api";
 import { useFetch } from "../../../hooks";
 import { useLocation } from "react-router-dom";
 
-import { forMateArticles, forMateTags } from "@/lib/utils";
+import { forMateArticles, forMateTags, getUrlParams } from "@/lib/utils";
 
 import { categoryList, ICategory } from "@/mock/data";
 
-function useDataInit(): any {
+function useDataInit(errorCb: (error: string) => void): any {
     const { loadData: loadTagData, data: tagData } = useFetch(getTags, false);
     const { loadData: loadArticleData, data: articleData } = useFetch(getArticle, false);
-    const { pathname } = useLocation();
-
+    const { pathname, search } = useLocation();
+    // const routerParams = useParams();
+    // console.log(routerParams);
+    console.log(search);
+    getUrlParams(search);
     useEffect(() => {
         try {
             const findIndex: number = categoryList.items.findIndex((c: ICategory) => c.path === pathname);
-            console.log("findIndex", findIndex);
             const params: string = findIndex === -1 ? "" : categoryList.items[findIndex].id;
-            console.log("findIndex", params);
             loadArticleData(params);
             if (params !== "") {
                 loadTagData(params);
-                console.log();
             }
+            console.log(search);
         } catch (error) {
             // errorCb(error);
+            errorCb(error);
         }
-    }, [loadArticleData, loadTagData, pathname]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [errorCb, pathname]);
     return {
         forMateHomeData: {
             articleData: articleData && forMateArticles(articleData),
