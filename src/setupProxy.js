@@ -2,12 +2,16 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
     app.use(
-        createProxyMiddleware("/api", {
-            target: "https://web-api.juejin.im",
-            secure: true,
+        createProxyMiddleware("/juejinApi", {
+            target: "https://apinew.juejin.im",
+            secure: false,
             changeOrigin: true,
             pathRewrite: {
-                "^/api": "/",
+                "^/juejinApi": "/",
+            },
+            headers: {
+                referer: "https://juejin.im/",
+                origin: "https://juejin.im",
             },
         }),
         createProxyMiddleware("/mock", {

@@ -39,18 +39,22 @@ const login: IFunc<ILoginParams> = (params) => {
  * @param category  类型id
  */
 
-const getArticle: any = (category: string = "") => {
-    return axios.post(`/api/query`, {
-        operationName: "",
-        query: "",
-        variables: { tags: [], category, first: 20, after: "", order: "POPULAR" },
-        first: 20,
-        after: "",
-        order: "POPULAR",
-        extensions: {
-            query: { id: category === "" ? JUEJINAPI_CONFIG.DEFAULT_ID : JUEJINAPI_CONFIG.CATEGORY_ID },
-        },
-    });
+const getArticle: any = async (category: string = "") => {
+    try {
+        const res: any = await axios.post(`/juejinApi/recommend_api/v1/article/recommend_cate_feed`, {
+            cate_id: "6809637769959178254",
+            cursor: "0",
+            id_type: 2,
+            limit: 20,
+            sort_type: 200,
+        });
+        if (res.err_msg === "success") {
+            return res;
+        }
+        console.log("res", res);
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 const getTags: any = (category: string) => {

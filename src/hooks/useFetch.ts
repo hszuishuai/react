@@ -34,7 +34,7 @@ export default function useFetch<Result = any, Args extends any[] = any[]>(
         },
         [fetchFn, isMounted]
     );
-
+    console.log(data);
     useEffect(() => {
         if (immediate) {
             loadData();

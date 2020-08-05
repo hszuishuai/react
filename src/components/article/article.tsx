@@ -3,11 +3,11 @@ import styles from "./index.module.less";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
 import { LikeOutlined, MessageOutlined } from "@ant-design/icons";
-import { IArticle, INode, ITag } from "@type/index";
+import { IArticle, ITag } from "@type/index";
 import { formDate } from "@/lib/utils";
 
 export interface ArticleProps extends ArticlesProps {
-    article: INode;
+    article: IArticle;
     id: number;
 }
 export interface ArticlesProps {
@@ -25,7 +25,7 @@ const Article: any = (props: ArticleProps) => {
         return tags.map((tag: ITag) => {
             return (
                 <span key={tag.id} className={styles.tags}>
-                    <Link to="/home">{tag.title}</Link>
+                    <Link to="/home">{tag.tag_name}</Link>
                 </span>
             );
         });
@@ -35,28 +35,28 @@ const Article: any = (props: ArticleProps) => {
             <div className={styles.article__body}>
                 <div className={`${styles.article__top} `}>
                     <div className={`${styles.article__top__item} ${styles.post}`}>专栏</div>
-                    <div className={styles.article__top__item}>{article.user.username}</div>
-                    <div className={styles.article__top__item}>{formDate(article.createdAt)}前</div>
+                    <div className={styles.article__top__item}>{article.author_user_info.user_name}</div>
+                    <div className={styles.article__top__item}>{formDate(article.article_info.mtime)}前</div>
                     <div className={styles.article__top__item}>{renderTags(article.tags)}</div>
                 </div>
                 <div className={styles.article__title}>
                     {/* <span className={styles.article__title--icon}></span> */}
                     <a className={styles.article__title__link} href="./" target="_blank">
-                        {article.title}
+                        {article.article_info.title}
                     </a>
                 </div>
                 <Button.Group>
                     <Button type="primary" className={styles.article__title__button}>
                         <LikeOutlined />
-                        {article.likeCount}
+                        {article.article_info.digg_count}
                     </Button>
                     <Button type="primary" className={styles.article__title__button}>
                         <MessageOutlined />
-                        {article.commentsCount}
+                        {article.article_info.comment_count}
                     </Button>
                 </Button.Group>
             </div>
-            {article.screenshot !== "" && <img className={styles.article__img} src={article.screenshot} alt="title" />}
+            {/* {article.screenshot !== "" && <img className={styles.article__img} src={article.screenshot} alt="title" />} */}
         </div>
     );
 };
@@ -66,7 +66,7 @@ const ArticleView: React.SFC<ArticlesProps> = (props) => {
     return (
         <Fragment>
             {articleList.map((article, index) => {
-                return <Article id={index} onClick={handClick} article={article.node} key={article.node.id} />;
+                return <Article id={index} onClick={handClick} article={article} key={article.article_id} />;
             })}
         </Fragment>
         // tslint:disable-next-line: object-literal-sort-keys

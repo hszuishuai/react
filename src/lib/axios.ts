@@ -1,8 +1,9 @@
 import axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from "axios";
 axios.defaults.timeout = 10000;
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 
-axios.defaults.headers["X-Agent"] = "Juejin/Web";
+// axios.defaults.headers["authority"] = "apinew.juejin.im";
+axios.defaults.headers["Content-type"] = "application/json";
 
 axios.interceptors.request.use(
     (config: AxiosRequestConfig) => {

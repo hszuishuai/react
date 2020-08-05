@@ -46,8 +46,8 @@ function formDate(utc_time: String): any {
  *  格式化文章接口数据
  * @param articles // IArticleFeed
  */
-function forMateArticles(articles: IArticleFeed): IArticles {
-    return articles.articleFeed.items;
+function forMateArticles(articles: IArticles): IArticles {
+    return articles;
 }
 
 /**

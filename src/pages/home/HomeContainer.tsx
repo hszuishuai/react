@@ -40,7 +40,7 @@ const HomeContainer: React.FC<any> = (props) => {
                         </header>
                     </nav>
                     {articleData ? (
-                        <ArticleView handClick={handClick} articleList={articleData.edges} />
+                        <ArticleView handClick={handClick} articleList={articleData} />
                     ) : (
                         <ArticleSkeleton />
                     )}

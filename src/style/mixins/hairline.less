@@ -1,0 +1,13 @@
+.hairline-common {
+    position: absolute;
+    content: "";
+    box-sizing: border-box;
+}
+
+.hairline-bottom(@left:0, @right:0, @color) {
+    .hairline-common();
+    bottom: 0;
+    left: @left;
+    right: @right;
+    border-bottom: 0 solid @color;
+}

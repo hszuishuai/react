@@ -8,12 +8,12 @@ import { forMateArticles, forMateTags, getUrlParams } from "@/lib/utils";
 import { categoryList, ICategory } from "@/mock/data";
 
 function useDataInit(errorCb: (error: string) => void): any {
-    const { loadData: loadTagData, data: tagData } = useFetch(getTags, false);
+    // const { loadData: loadTagData, data: tagData } = useFetch(getTags, false);
     const { loadData: loadArticleData, data: articleData } = useFetch(getArticle, false);
     const { pathname, search } = useLocation();
     // const routerParams = useParams();
     // console.log(routerParams);
-    console.log(search);
+
     getUrlParams(search);
     useEffect(() => {
         try {
@@ -21,7 +21,7 @@ function useDataInit(errorCb: (error: string) => void): any {
             const params: string = findIndex === -1 ? "" : categoryList.items[findIndex].id;
             loadArticleData(params);
             if (params !== "") {
-                loadTagData(params);
+                //loadTagData(params);
             }
             console.log(search);
         } catch (error) {
@@ -30,10 +30,12 @@ function useDataInit(errorCb: (error: string) => void): any {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [errorCb, pathname]);
+
+    console.log(articleData);
     return {
         forMateHomeData: {
             articleData: articleData && forMateArticles(articleData),
-            tagData: tagData && forMateTags(tagData),
+            // tagData: tagData && forMateTags(tagData),
         },
     };
 }

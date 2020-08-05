@@ -10,7 +10,7 @@ const Tags: React.SFC<any> = ({ tags }) => {
                 {tags.map((tag: ITag, index: number) => {
                     return (
                         <li key={index} className={styles.tag_nav_item}>
-                            {tag.title}
+                            {tag.tag_name}
                         </li>
                     );
                 })}
