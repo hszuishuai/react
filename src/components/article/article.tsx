@@ -56,14 +56,15 @@ const Article: any = (props: ArticleProps) => {
                     </Button>
                 </Button.Group>
             </div>
-            {/* {article.screenshot !== "" && <img className={styles.article__img} src={article.screenshot} alt="title" />} */}
+            {article.article_info.cover_image !== "" && (
+                <img className={styles.article__img} src={article.article_info.cover_image} alt="title" />
+            )}
         </div>
     );
 };
 
 const ArticleView: React.SFC<ArticlesProps> = (props) => {
     const { articleList, handClick } = props;
-    console.log("articleList", articleList);
     return (
         <Fragment>
             {articleList.map((article, index) => {

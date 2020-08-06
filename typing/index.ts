@@ -74,7 +74,7 @@ export interface IArticleInfo {
     collect_count: Number;
     comment_count: Number;
     content: String;
-    cover_image: String;
+    cover_image: string;
     ctime: String;
     digg_count: Number;
     draft_id: String;

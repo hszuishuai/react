@@ -53,4 +53,5 @@ const HomeContainer: React.FC<any> = (props) => {
     );
 };
 
-export default HomeContainer;
+export default React.memo(HomeContainer);
+//export default HomeContainer;

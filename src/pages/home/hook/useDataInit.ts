@@ -32,7 +32,7 @@ function useDataInit(errorCb: (error: string) => void): any {
                 const param = paramItem ? { cate_id: paramItem.category_id } : {};
                 loadArticleData(param);
                 if (paramItem) {
-                    loadTagData({});
+                    loadTagData(param);
                 }
             }
             //console.log(search);
