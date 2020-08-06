@@ -1,22 +1,35 @@
 import * as React from "react";
 //import classNames from "classnames";
 
-import { categoryList } from "../../mock/data";
+//import { categoryList } from "../../mock/data";
+import { ICategory } from "../../../typing";
 import styles from "./index.module.less";
 
 import { NavLink } from "react-router-dom";
 //import styles from "./navigate.module.less";
 
-const Navigate: React.SFC<any> = () => {
+export interface INavProp {
+    categoryList: Array<ICategory>;
+}
+
+const Navigate: React.SFC<INavProp> = ({ categoryList }) => {
+    // if (!categoryList) {
+    //     return null;
+    // }
     return (
         <div className={styles.main__header}>
             <nav className={styles.view__nav}>
                 <ul className={styles.nav__list}>
-                    {categoryList.items.map((category: any) => {
+                    <li className={styles.nav__item}>
+                        <NavLink to={"/home/recommend"} activeClassName={styles.active}>
+                            推荐
+                        </NavLink>
+                    </li>
+                    {categoryList.map((category: ICategory) => {
                         return (
-                            <li key={category.id} className={styles.nav__item}>
-                                <NavLink to={category.path} activeClassName={styles.active}>
-                                    {category.category}
+                            <li key={category.category_id} className={styles.nav__item}>
+                                <NavLink to={"/home/" + category.category_url} activeClassName={styles.active}>
+                                    {category.category_name}
                                 </NavLink>
                             </li>
                         );

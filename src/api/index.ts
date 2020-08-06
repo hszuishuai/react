@@ -1,6 +1,7 @@
 import axios from "../lib/axios";
-import { AxiosResponse } from "axios";
+//import { AxiosResponse } from "axios";
 import { ILoginParams } from "../mobx/user/type";
+import { isObjectEmpty, forRecommendArticle } from "@/lib/utils";
 // const JUEJIN_URL: String = "https://web-api.juejin.im";
 
 // {
@@ -15,15 +16,9 @@ import { ILoginParams } from "../mobx/user/type";
 // 	}
 // }
 
-const JUEJINAPI_CONFIG: any = {
-    CATEGORY_ID: "653b587c5c7c8a00ddf67fc66f989d42",
-    DEFAULT_ID: "21207e9ddb1de777adeaca7a2fb38030",
-};
-const TAG_QUERY_ID: string = "801e22bdc908798e1c828ba6b71a9fd9";
-
-type IPromise<T> = {
-    (): Promise<AxiosResponse<T>>;
-};
+// type IPromise<T> = {
+//     (): Promise<AxiosResponse<T>>;
+// };
 
 //const BASE_URL = "http://localhost:4000"
 interface IFunc<T> {
@@ -39,17 +34,21 @@ const login: IFunc<ILoginParams> = (params) => {
  * @param category  类型id
  */
 
-const getArticle: any = async (category: string = "") => {
+const getArticle: any = async (options = {}) => {
     try {
-        const res: any = await axios.post(`/juejinApi/recommend_api/v1/article/recommend_cate_feed`, {
-            cate_id: "6809637769959178254",
+        const url: string = isObjectEmpty(options)
+            ? "/juejinApi/recommend_api/v1/article/recommend_all_feed"
+            : "/juejinApi/recommend_api/v1/article/recommend_cate_feed";
+        const res: any = await axios.post(url, {
             cursor: "0",
             id_type: 2,
             limit: 20,
             sort_type: 200,
+            ...options,
         });
         if (res.err_msg === "success") {
-            return res;
+            console.log(forRecommendArticle(res.data));
+            return isObjectEmpty(options) ? { ...res, data: forRecommendArticle(res.data) } : res;
         }
         console.log("res", res);
     } catch (e) {
@@ -57,13 +56,22 @@ const getArticle: any = async (category: string = "") => {
     }
 };
 
-const getTags: any = (category: string) => {
-    return axios.post("/api/query", {
-        extensions: { query: { id: TAG_QUERY_ID } },
-        operationName: "",
-        query: "",
-        variables: { category: category, limit: 15 },
+/**
+ *  获取文章种类下的tag
+ * @param category
+ */
+
+const getTags: any = (options = {}) => {
+    return axios.post("/juejinApi/recommend_api/v1/tag/recommend_tag_list", {
+        ...options,
     });
 };
 
-export { login, getArticle, getTags };
+/**
+ *  获取文章类型
+ */
+const getCategoryList: any = () => {
+    return axios.get("/juejinApi/tag_api/v1/query_category_briefs?show_type=0");
+};
+
+export { login, getArticle, getTags, getCategoryList };

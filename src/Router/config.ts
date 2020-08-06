@@ -1,14 +1,14 @@
 import { ComponentProps } from "react";
 import { lazy } from "react";
-import { categoryList } from "@/mock/data";
+//import { categoryList } from "@/mock/data";
 
-const homeRouter: any = categoryList.items.map((category: any) => {
-    const homeRoute: any = {};
-    homeRoute.exact = true;
-    homeRoute.component = lazy(() => import("@/pages/home/Home"));
-    homeRoute.path = category.path;
-    return homeRoute;
-});
+// const homeRouter: any = categoryList.items.map((category: any) => {
+//     const homeRoute: any = {};
+//     homeRoute.exact = true;
+//     homeRoute.component = lazy(() => import("@/pages/home/Home"));
+//     homeRoute.path = category.path;
+//     return homeRoute;
+// });
 
 export interface IRouter {
     component: ComponentProps<any>;
@@ -19,10 +19,10 @@ export interface IRouter {
 const routeList: IRouter[] = [
     {
         component: lazy(() => import("../pages/home/Home")),
-        path: "/home",
+        path: "/home/:id",
         // tslint:disable-next-line: object-literal-sort-keys
         exact: false,
-        children: homeRouter,
+        //children: homeRouter,
     },
     {
         component: lazy(() => import("../App")),

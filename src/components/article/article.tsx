@@ -24,7 +24,7 @@ const Article: any = (props: ArticleProps) => {
     const renderTags: any = (tags: Array<ITag>) => {
         return tags.map((tag: ITag) => {
             return (
-                <span key={tag.id} className={styles.tags}>
+                <span key={tag.tag_id} className={styles.tags}>
                     <Link to="/home">{tag.tag_name}</Link>
                 </span>
             );
@@ -63,6 +63,7 @@ const Article: any = (props: ArticleProps) => {
 
 const ArticleView: React.SFC<ArticlesProps> = (props) => {
     const { articleList, handClick } = props;
+    console.log("articleList", articleList);
     return (
         <Fragment>
             {articleList.map((article, index) => {

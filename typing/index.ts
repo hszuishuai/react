@@ -21,7 +21,7 @@ export interface ITag {
     post_article_count: number;
     show_navi: number;
     tag_alias: String;
-    tag_id: String;
+    tag_id: string;
     id: number;
     tag_name: String;
 }
@@ -43,6 +43,13 @@ export interface ITagNav {
         items: Array<ITag>;
     };
 }
+/**
+ *  推荐类型文章接口
+ */
+export interface IRecommendArticle {
+    item_info: IArticle | never;
+    item_type: number;
+}
 
 /**
  * 文章类型接口
@@ -55,18 +62,6 @@ export interface IArticle {
     tags: Array<ITag>;
     user_interact: IUserInfo;
 }
-export interface IPageInfo {
-    hasNextPage: Boolean;
-    endCursor: String;
-}
-
-/**
- *  文章数组接口
- */
-export interface IArticles {
-    edges: Array<IArticle>;
-    pageInfo: IPageInfo;
-}
 
 /**
  * 文章详情接口
@@ -75,7 +70,7 @@ export interface IArticleInfo {
     article_id: String;
     audit_status: Number;
     brief_content: String;
-    category_id: String;
+    category_id: string;
     collect_count: Number;
     comment_count: Number;
     content: String;
@@ -130,7 +125,7 @@ export interface IUserInfo {
 }
 
 export interface ICategory {
-    category_id: String;
+    category_id: string;
     category_name: String;
     category_url: String;
     ctime: Number;
@@ -139,14 +134,6 @@ export interface ICategory {
     show_type: Number;
 }
 
-/**
- * 请求的articleFeed接口返回的数据
- */
-export interface IArticleFeed {
-    articleFeed: {
-        items: IArticles;
-    };
-}
 export interface IOnclick<T> {
     (e?: T): void;
 }

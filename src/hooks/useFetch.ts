@@ -5,7 +5,7 @@ export type TFetch<T> = {
     data?: T | undefined;
     loading: Boolean;
     error?: undefined | Error;
-    loadData: (params: T) => Promise<T>;
+    loadData: (params: T | undefined) => Promise<T>;
 };
 
 export default function useFetch<Result = any, Args extends any[] = any[]>(
@@ -34,7 +34,6 @@ export default function useFetch<Result = any, Args extends any[] = any[]>(
         },
         [fetchFn, isMounted]
     );
-    console.log(data);
     useEffect(() => {
         if (immediate) {
             loadData();

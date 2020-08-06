@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Tags from "@/components/tags";
 import ArticleView from "@/components/article/article";
 import { Login } from "./modules";
@@ -10,7 +10,7 @@ import styles from "./Home.module.less";
 
 const HomeContainer: React.FC<any> = (props) => {
     const { tagData, articleData } = props;
-    const Location = useLocation();
+    const Location = useParams();
     console.log(Location);
     const handClick: any = (id: number) => {
         console.log(id);

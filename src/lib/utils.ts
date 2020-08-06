@@ -1,4 +1,4 @@
-import { IArticles, ITag, IArticleFeed, ITagNav } from "../../typing";
+import { IArticle, ITag, ITagNav, IRecommendArticle, ICategory } from "../../typing";
 
 /**
  *
@@ -46,7 +46,7 @@ function formDate(utc_time: String): any {
  *  格式化文章接口数据
  * @param articles // IArticleFeed
  */
-function forMateArticles(articles: IArticles): IArticles {
+function forMateArticles(articles: Array<IArticle>): Array<IArticle> {
     return articles;
 }
 
@@ -56,6 +56,15 @@ function forMateArticles(articles: IArticles): IArticles {
  */
 function forMateTags(tags: ITagNav): Array<ITag> {
     return tags.tagNav.items;
+}
+
+function forRecommendArticle(articles: Array<IRecommendArticle>): Array<IArticle> {
+    return articles.reduce((current: Array<IArticle>, article) => {
+        if (article.item_type === 2) {
+            current.push(article.item_info);
+        }
+        return current;
+    }, []);
 }
 
 /**
@@ -75,5 +84,13 @@ function getUrlParams(search: string): object {
     }
     return {};
 }
+/**
+ * 判断object是否为空
+ * @param object
+ */
 
-export { formDate, forMateArticles, forMateTags, getUrlParams };
+function isObjectEmpty(object: object): boolean {
+    return Object.keys(object).length === 0 ? true : false;
+}
+
+export { formDate, forMateArticles, forMateTags, getUrlParams, forRecommendArticle, isObjectEmpty };

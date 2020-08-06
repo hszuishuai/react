@@ -90,7 +90,7 @@ function Home(props: Props): JSX.Element {
 
     return (
         <div className={styles.home} ref={ref}>
-            <Nav />
+            <Nav categoryList={forMateHomeData.categoryData || []} />
             <HomeContainer {...forMateHomeData} />
         </div>
     );
