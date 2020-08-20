@@ -1,20 +1,40 @@
+@import "../../style/global.less";
+
 .tag_nav {
     width: 100%;
     margin-top: 1rem;
-    .tag_nav_list {
+    &_list {
         display: flex;
         flex-wrap: wrap;
         .tag_nav_item {
+            cursor: pointer;
             display: flex;
             background-color: #ffffff;
             height: 2rem;
             align-items: center;
             justify-content: center;
             border-radius: 1rem;
-            font-size: 1rem;
+            font-size: 0.8rem;
             margin-right: 1rem;
             margin-bottom: 1rem;
             padding: 0 0.8rem;
+            &:hover {
+                color: @hover-color;
+            }
+        }
+    }
+    .unfold {
+        position: relative;
+        padding-right: 1rem;
+        &::after {
+            position: absolute;
+            right: 5px;
+            content: "";
+            width: 0;
+            height: 5px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #8a9aa9;
         }
     }
 }

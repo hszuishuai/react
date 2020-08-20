@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, RefObject } from "react";
+import React, { useCallback } from "react";
 //import { useHistory, useLocation } from "react-router-dom";
 // import NavigationBar from "../../component/navigationBar";
 import styles from "./Home.module.less";

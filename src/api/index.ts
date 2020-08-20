@@ -29,17 +29,23 @@ const login: IFunc<ILoginParams> = (params) => {
     return axios.post(`/login`, params);
 };
 
+export interface IArticleParam {
+    cate_id?: string;
+    sort_type?: number;
+}
 /**
  *
  * @param category  类型id
  */
 
-const getArticle: any = async (options = {}) => {
+const getArticle: any = async (options: IArticleParam = {}) => {
     try {
-        const url: string = isObjectEmpty(options)
-            ? "/juejinApi/recommend_api/v1/article/recommend_all_feed"
-            : "/juejinApi/recommend_api/v1/article/recommend_cate_feed";
+        const url: string = options.cate_id
+            ? "/juejinApi/recommend_api/v1/article/recommend_cate_feed"
+            : "/juejinApi/recommend_api/v1/article/recommend_all_feed";
+
         const res: any = await axios.post(url, {
+            client_type: 2608,
             cursor: "0",
             id_type: 2,
             limit: 20,
@@ -48,7 +54,7 @@ const getArticle: any = async (options = {}) => {
         });
         if (res.err_msg === "success") {
             console.log(forRecommendArticle(res.data));
-            return isObjectEmpty(options) ? { ...res, data: forRecommendArticle(res.data) } : res;
+            return options.cate_id ? res : { ...res, data: forRecommendArticle(res.data) };
         }
         console.log("res", res);
     } catch (e) {

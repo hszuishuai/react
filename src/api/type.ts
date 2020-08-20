@@ -3,7 +3,7 @@ type num = "vue" | "react";
 type IsNumber<T> = T extends number ? string : boolean;
 
 const a: IsNumber<string> = false;
-type IFor = { [p in num]: string };
+type IFor = { [p in num]: p };
 
 type IObj<T> = { [p in keyof T]: p };
 

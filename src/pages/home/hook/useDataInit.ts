@@ -1,20 +1,25 @@
 import { useEffect } from "react";
 import { getArticle, getTags, getCategoryList } from "@/api";
 import { useFetch } from "../../../hooks";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 import { forMateArticles, getUrlParams } from "@/lib/utils";
 
 import { ICategory } from "../../../../typing";
 // import { categoryList, ICategory } from "@/mock/data";
+export enum SORT_TYPE {
+    "popular" = 200,
+    "newest" = 300,
+    "three_days_hottest" = 3,
+}
 
 function useDataInit(errorCb: (error: string) => void): any {
     const { loadData: loadTagData, data: tagData } = useFetch(getTags, false);
     const { loadData: loadArticleData, data: articleData } = useFetch(getArticle, false);
     const { loadData: loadCategoryData, data: categoryData } = useFetch<Array<ICategory>>(getCategoryList, false);
     const routerParams: any = useParams();
-    // const routerParams = useParams();
-    // console.log(routerParams);
+    const { search } = useLocation();
+    //const routerParams = useParams();
 
     //getUrlParams(search);
     useEffect(() => {
@@ -29,7 +34,13 @@ function useDataInit(errorCb: (error: string) => void): any {
                 const paramItem: ICategory | undefined = categoryData.find((category) => {
                     return category.category_url === routerParams.id;
                 }); //categoryData
-                const param = paramItem ? { cate_id: paramItem.category_id } : {};
+                let param: any = paramItem ? { cate_id: paramItem.category_id } : {};
+                const urlParam: any = getUrlParams(search);
+                param = {
+                    ...param,
+                    sort_type: urlParam.sort ? SORT_TYPE[urlParam.sort] : 200,
+                };
+                console.log(urlParam);
                 loadArticleData(param);
                 if (paramItem) {
                     loadTagData(param);
@@ -41,7 +52,7 @@ function useDataInit(errorCb: (error: string) => void): any {
             errorCb(error);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [errorCb, routerParams.id, categoryData]);
+    }, [errorCb, routerParams.id, categoryData, search]);
 
     useEffect(() => {
         loadCategoryData([]);
