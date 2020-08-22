@@ -32,6 +32,10 @@ const login: IFunc<ILoginParams> = (params) => {
 export interface IArticleParam {
     cate_id?: string;
     sort_type?: number;
+    client_type?: number;
+    cursor?: string;
+    id_type?: number;
+    limit?: number;
 }
 /**
  *

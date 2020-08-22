@@ -18,3 +18,11 @@ code {
 #root {
     background-color: #f4f5f5;
 }
+.footer {
+    position: relative;
+    bottom: 100px;
+    background-color: aqua;
+}
+.test {
+    height: 1200px;
+}

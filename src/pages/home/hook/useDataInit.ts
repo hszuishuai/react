@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { getArticle, getTags, getCategoryList } from "@/api";
+import { useEffect, useCallback } from "react";
+import { getArticle, getTags, getCategoryList, IArticleParam } from "@/api";
 import { useFetch } from "../../../hooks";
 import { useParams, useLocation } from "react-router-dom";
 
@@ -21,6 +21,25 @@ function useDataInit(errorCb: (error: string) => void): any {
     const { search } = useLocation();
     //const routerParams = useParams();
 
+    const getParams: () => IArticleParam = useCallback(
+        (options = {}) => {
+            if (categoryData) {
+                const paramItem: ICategory | undefined = categoryData.find((category) => {
+                    return category.category_url === routerParams.id;
+                }); //categoryData
+                let param: any = paramItem ? { cate_id: paramItem.category_id } : {};
+                const urlParam: any = getUrlParams(search);
+                param = {
+                    ...param,
+                    sort_type: urlParam.sort ? SORT_TYPE[urlParam.sort] : 200,
+                    ...options,
+                };
+                return param;
+            }
+            return {};
+        },
+        [routerParams.id, categoryData, search]
+    );
     //getUrlParams(search);
     useEffect(() => {
         try {
@@ -31,20 +50,9 @@ function useDataInit(errorCb: (error: string) => void): any {
             //     loadTagData(params);
             // }
             if (categoryData) {
-                const paramItem: ICategory | undefined = categoryData.find((category) => {
-                    return category.category_url === routerParams.id;
-                }); //categoryData
-                let param: any = paramItem ? { cate_id: paramItem.category_id } : {};
-                const urlParam: any = getUrlParams(search);
-                param = {
-                    ...param,
-                    sort_type: urlParam.sort ? SORT_TYPE[urlParam.sort] : 200,
-                };
-                console.log(urlParam);
+                const param: IArticleParam = getParams();
                 loadArticleData(param);
-                if (paramItem) {
-                    loadTagData(param);
-                }
+                param.cate_id && loadTagData(param);
             }
             //console.log(search);
         } catch (error) {
@@ -52,7 +60,7 @@ function useDataInit(errorCb: (error: string) => void): any {
             errorCb(error);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [errorCb, routerParams.id, categoryData, search]);
+    }, [errorCb, getParams]);
 
     useEffect(() => {
         loadCategoryData([]);

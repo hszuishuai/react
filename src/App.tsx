@@ -2,7 +2,7 @@
 import React, { useState, memo, useMemo, useCallback, useEffect } from "react";
 
 import { IOnclick } from "../typing";
-import "@/mock";
+import useObserve from "@/hooks/useObserve";
 
 // redux
 // import { connect } from "react-redux";
@@ -42,7 +42,9 @@ const App: React.SFC<IState> = (props) => {
     const { msg, child } = state;
     const [enable, setToggle] = useToggle(false);
 
-    console.log(enable);
+    const [ref] = useObserve();
+
+    console.log(enable, ref);
     //useCallback的使用--------------优化子组件的重复渲染
     //使用 useState 避免数据的错乱
     const getMsg: (Msg: string) => Promise<void> = async (Msg) => {
@@ -57,25 +59,23 @@ const App: React.SFC<IState> = (props) => {
         _UserInfo.remove();
     };
 
-    useEffect(() => {
-        console.log("执行", count);
-
-        // setCount(count + 1);
-    }, [count]);
-
     return (
         <div className="App">
-            <div>react</div>
+            <div className="test">react</div>
             {/* <MemoChildren  news={msg} /> */}
             <ArticleSkeleton />
             <MemoChildren news={useMemo(() => msg, [msg])} setMsg={useCallback((Msg) => getMsg(Msg), [])} />
             <h1>{child}</h1>
             <p>{count}</p>
             <p>{enable}</p>
+
             <button onClick={() => loginOut()}>退出</button>
             <button onClick={() => setCount(count + 1)}>点击</button>
             <button onClick={setToggle}>toggle</button>
             <ConfigConsumer>{renderDom}</ConfigConsumer>
+            <div className="footer" ref={ref}>
+                footer
+            </div>
             {/* <ConfigConsumer>
                 {" "}
                 <div></div>{" "}
