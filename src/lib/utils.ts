@@ -123,4 +123,14 @@ function isObjectEmpty(object: object): boolean {
     return Object.keys(object).length === 0 ? true : false;
 }
 
-export { formDate, forMateArticles, forMateTags, getUrlParams, forRecommendArticle, isObjectEmpty };
+/**
+ *   字符串转base64
+ * @param str  //字符串
+ */
+function strToBase64(str: string) {
+    const encode = encodeURI(str);
+    const base64 = btoa(encode);
+    return base64;
+}
+
+export { formDate, forMateArticles, forMateTags, getUrlParams, forRecommendArticle, isObjectEmpty, strToBase64 };

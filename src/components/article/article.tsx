@@ -68,7 +68,7 @@ const ArticleView: React.SFC<ArticlesProps> = (props) => {
     return (
         <Fragment>
             {articleList.map((article, index) => {
-                return <Article id={index} onClick={handClick} article={article} key={article.article_id} />;
+                return <Article id={index} onClick={handClick} article={article} key={index} />;
             })}
         </Fragment>
         // tslint:disable-next-line: object-literal-sort-keys

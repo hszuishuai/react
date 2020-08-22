@@ -79,19 +79,24 @@ export interface IndexRouter {
 }
 
 function Home(props: Props): JSX.Element {
-    const { forMateHomeData } = useDataInit(
+    const { forMateHomeData, loadMoreArticle } = useDataInit(
         useCallback((error: string) => {
             console.log(error);
         }, [])
     );
 
     const [ref] = useObserve<HTMLDivElement>();
+    const handlerMore = () => {
+        console.log("22222222");
+        loadMoreArticle({ cursor: "eyJ2IjoiNjg2MzM1MTk4OTAxNjE2NjQwNyIsImkiOjIwfQ==" });
+    };
     console.log(ref);
 
     return (
         <div className={styles.home} ref={ref}>
             <Nav categoryList={forMateHomeData.categoryData || []} />
             <HomeContainer {...forMateHomeData} />
+            <button onClick={handlerMore}>2222</button>
         </div>
     );
 }

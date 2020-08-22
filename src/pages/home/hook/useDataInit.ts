@@ -1,11 +1,11 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import { getArticle, getTags, getCategoryList, IArticleParam } from "@/api";
 import { useFetch } from "../../../hooks";
 import { useParams, useLocation } from "react-router-dom";
 
 import { forMateArticles, getUrlParams } from "@/lib/utils";
 
-import { ICategory } from "../../../../typing";
+import { ICategory, IArticle } from "../../../../typing";
 // import { categoryList, ICategory } from "@/mock/data";
 export enum SORT_TYPE {
     "popular" = 200,
@@ -15,13 +15,13 @@ export enum SORT_TYPE {
 
 function useDataInit(errorCb: (error: string) => void): any {
     const { loadData: loadTagData, data: tagData } = useFetch(getTags, false);
-    const { loadData: loadArticleData, data: articleData } = useFetch(getArticle, false);
+    const { loadData: loadArticleData, data: articleData, loadMoreData } = useFetch(getArticle, false);
     const { loadData: loadCategoryData, data: categoryData } = useFetch<Array<ICategory>>(getCategoryList, false);
     const routerParams: any = useParams();
     const { search } = useLocation();
+    //const [articleList, setArticleList] = useState<Array<IArticle>>([]);
     //const routerParams = useParams();
-
-    const getParams: () => IArticleParam = useCallback(
+    const getParams: (option?: object | undefined) => IArticleParam = useCallback(
         (options = {}) => {
             if (categoryData) {
                 const paramItem: ICategory | undefined = categoryData.find((category) => {
@@ -43,15 +43,9 @@ function useDataInit(errorCb: (error: string) => void): any {
     //getUrlParams(search);
     useEffect(() => {
         try {
-            // const findIndex: number = categoryList.items.findIndex((c: ICategory) => c.path === pathname);
-            // const params: string = findIndex === -1 ? "" : categoryList.items[findIndex].id;
-            //loadArticleData(params);
-            // if (params !== "") {
-            //     loadTagData(params);
-            // }
             if (categoryData) {
                 const param: IArticleParam = getParams();
-                loadArticleData(param);
+                loadMoreData(param);
                 param.cate_id && loadTagData(param);
             }
             //console.log(search);
@@ -62,6 +56,16 @@ function useDataInit(errorCb: (error: string) => void): any {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [errorCb, getParams]);
 
+    //more articleData
+
+    const loadMoreArticle = useCallback(async (options) => {
+        console.log(options);
+        const params: IArticleParam = getParams(options);
+        console.log(params);
+        categoryData && (await loadMoreData(params));
+        //setArticleList(articleData);
+    }, []);
+
     useEffect(() => {
         loadCategoryData([]);
     }, []);
@@ -71,6 +75,7 @@ function useDataInit(errorCb: (error: string) => void): any {
             categoryData: categoryData,
             tagData: tagData,
         },
+        loadMoreArticle,
     };
 }
 
