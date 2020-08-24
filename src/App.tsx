@@ -1,5 +1,5 @@
 // import './App.css';
-import React, { useState, memo, useMemo, useCallback, useEffect } from "react";
+import React, { useState, memo, useMemo, useCallback } from "react";
 
 import { IOnclick } from "../typing";
 import useObserve from "@/hooks/useObserve";

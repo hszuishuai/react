@@ -6,14 +6,29 @@ import { Login } from "./modules";
 
 import { ArticleSkeleton } from "@/components/skeleton";
 import { getUrlParams } from "@/lib/utils";
-import { SORT_TYPE } from "./hook/useDataInit";
+import useObserve from "@/hooks/useObserve";
+import { ITag, IArticle } from "../../../typing";
 
 import styles from "./Home.module.less";
 
-const HomeContainer: React.FC<any> = (props) => {
-    const { tagData, articleData } = props;
+export interface IHomeContainerProp {
+    tagData?: Array<ITag>;
+    articleData?: Array<IArticle>;
+    handlerMore: () => void;
+}
+
+const HomeContainer: React.FC<IHomeContainerProp> = (props) => {
+    const { tagData, articleData, handlerMore } = props;
     //tag展开
     const [isUnfold, setUnfold] = useState<Boolean>(false);
+
+    const [ref] = useObserve<HTMLDivElement>((entries) => {
+        //handlerMore();
+        if (entries[0].intersectionRatio <= 0) {
+            return;
+        }
+        handlerMore();
+    });
 
     const { search }: any = useLocation();
 
@@ -80,6 +95,7 @@ const HomeContainer: React.FC<any> = (props) => {
                     ) : (
                         <ArticleSkeleton />
                     )}
+                    <div ref={ref} className={styles.home__footer}></div>
                 </div>
                 <div className={styles.welcome_aside}>
                     <Login />

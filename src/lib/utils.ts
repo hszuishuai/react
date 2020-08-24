@@ -133,4 +133,13 @@ function strToBase64(str: string) {
     return base64;
 }
 
-export { formDate, forMateArticles, forMateTags, getUrlParams, forRecommendArticle, isObjectEmpty, strToBase64 };
+export {
+    formDate,
+    forMateArticles,
+    formUtcDate,
+    forMateTags,
+    getUrlParams,
+    forRecommendArticle,
+    isObjectEmpty,
+    strToBase64,
+};

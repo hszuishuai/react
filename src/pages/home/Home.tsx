@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 //import { useHistory, useLocation } from "react-router-dom";
 // import NavigationBar from "../../component/navigationBar";
 import styles from "./Home.module.less";
@@ -11,8 +11,9 @@ import HomeContainer from "./HomeContainer";
 
 //初始化数据
 import useDataInit from "./hook/useDataInit";
-import useObserve from "@/hooks/useObserve";
+//import useObserve from "@/hooks/useObserve";
 
+import { strToBase64 } from "@/lib/utils";
 //import useMountState from "@/hooks/useMountState";
 //import useFetch from "@/hooks/useFetch";
 
@@ -78,25 +79,34 @@ export interface IndexRouter {
     text?: string;
 }
 
+//每次滚动刷新的数量
+const SCROLL_NUMBER: number = 20 as const;
 function Home(props: Props): JSX.Element {
+    //page
+    const [page, setPage] = useState<number>(1);
     const { forMateHomeData, loadMoreArticle } = useDataInit(
         useCallback((error: string) => {
             console.log(error);
         }, [])
     );
 
-    const [ref] = useObserve<HTMLDivElement>();
-    const handlerMore = () => {
+    const handlerMore = useCallback(() => {
         console.log("22222222");
-        loadMoreArticle({ cursor: "eyJ2IjoiNjg2MzM1MTk4OTAxNjE2NjQwNyIsImkiOjIwfQ==" });
-    };
-    console.log(ref);
+        setPage(page + 1);
+        const cursor: string = strToBase64(
+            JSON.stringify({
+                i: SCROLL_NUMBER * (page + 1),
+                v: 6863351989016166407,
+            })
+        );
+        loadMoreArticle({ cursor });
+    }, [page]);
+    //console.log(ref);
 
     return (
-        <div className={styles.home} ref={ref}>
+        <div className={styles.home}>
             <Nav categoryList={forMateHomeData.categoryData || []} />
-            <HomeContainer {...forMateHomeData} />
-            <button onClick={handlerMore}>2222</button>
+            <HomeContainer {...forMateHomeData} handlerMore={handlerMore} />
         </div>
     );
 }

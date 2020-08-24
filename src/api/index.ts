@@ -1,7 +1,7 @@
 import axios from "../lib/axios";
 //import { AxiosResponse } from "axios";
 import { ILoginParams } from "../mobx/user/type";
-import { isObjectEmpty, forRecommendArticle } from "@/lib/utils";
+import { forRecommendArticle } from "@/lib/utils";
 // const JUEJIN_URL: String = "https://web-api.juejin.im";
 
 // {

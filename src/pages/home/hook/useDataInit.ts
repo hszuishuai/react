@@ -1,11 +1,11 @@
-import { useEffect, useCallback, useState, useRef } from "react";
+import { useEffect, useCallback } from "react";
 import { getArticle, getTags, getCategoryList, IArticleParam } from "@/api";
 import { useFetch } from "../../../hooks";
 import { useParams, useLocation } from "react-router-dom";
 
 import { forMateArticles, getUrlParams } from "@/lib/utils";
 
-import { ICategory, IArticle } from "../../../../typing";
+import { ICategory } from "../../../../typing";
 // import { categoryList, ICategory } from "@/mock/data";
 export enum SORT_TYPE {
     "popular" = 200,
@@ -45,7 +45,7 @@ function useDataInit(errorCb: (error: string) => void): any {
         try {
             if (categoryData) {
                 const param: IArticleParam = getParams();
-                loadMoreData(param);
+                loadArticleData(param);
                 param.cate_id && loadTagData(param);
             }
             //console.log(search);
@@ -57,14 +57,16 @@ function useDataInit(errorCb: (error: string) => void): any {
     }, [errorCb, getParams]);
 
     //more articleData
-
-    const loadMoreArticle = useCallback(async (options) => {
-        console.log(options);
-        const params: IArticleParam = getParams(options);
-        console.log(params);
-        categoryData && (await loadMoreData(params));
-        //setArticleList(articleData);
-    }, []);
+    const loadMoreArticle = useCallback(
+        async (options) => {
+            //console.log(options);
+            const params: IArticleParam = getParams(options);
+            //console.log(params);
+            categoryData && (await loadMoreData(params));
+            //setArticleList(articleData);
+        },
+        [categoryData]
+    );
 
     useEffect(() => {
         loadCategoryData([]);
