@@ -5,7 +5,7 @@ import ArticleView from "@/components/article/article";
 import { Login } from "./modules";
 
 import { ArticleSkeleton } from "@/components/skeleton";
-import { getUrlParams } from "@/lib/utils";
+import { getUrlParams, isArrayEmpty } from "@/lib/utils";
 import useObserve from "@/hooks/useObserve";
 import { ITag, IArticle } from "../../../typing";
 
@@ -24,9 +24,10 @@ const HomeContainer: React.FC<IHomeContainerProp> = (props) => {
 
     const [ref] = useObserve<HTMLDivElement>((entries) => {
         //handlerMore();
-        if (entries[0].intersectionRatio <= 0) {
+        if (entries[0].intersectionRatio <= 0 || entries[0].intersectionRatio === 1) {
             return;
         }
+        console.log("dad", entries[0].intersectionRatio);
         handlerMore();
     });
 
@@ -90,10 +91,10 @@ const HomeContainer: React.FC<IHomeContainerProp> = (props) => {
                             </ul>
                         </header>
                     </nav>
-                    {articleData ? (
-                        <ArticleView handClick={handClick} articleList={articleData} />
-                    ) : (
+                    {isArrayEmpty(articleData) ? (
                         <ArticleSkeleton />
+                    ) : (
+                        <ArticleView handClick={handClick} articleList={articleData as Array<IArticle>} />
                     )}
                     <div ref={ref} className={styles.home__footer}></div>
                 </div>

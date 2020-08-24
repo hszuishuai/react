@@ -91,7 +91,6 @@ function Home(props: Props): JSX.Element {
     );
 
     const handlerMore = useCallback(() => {
-        console.log("22222222");
         setPage(page + 1);
         const cursor: string = strToBase64(
             JSON.stringify({

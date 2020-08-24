@@ -123,6 +123,13 @@ function isObjectEmpty(object: object): boolean {
     return Object.keys(object).length === 0 ? true : false;
 }
 
+function isArrayEmpty(array: any[] | undefined): boolean {
+    if (Array.isArray(array)) {
+        return array.length === 0 ? true : false;
+    }
+    return true;
+}
+
 /**
  *   字符串转base64
  * @param str  //字符串
@@ -141,5 +148,6 @@ export {
     getUrlParams,
     forRecommendArticle,
     isObjectEmpty,
+    isArrayEmpty,
     strToBase64,
 };
