@@ -1,0 +1,53 @@
+@import "../../../../style/mixins/ellipsis.less";
+@import "../../../../style/global.less";
+.author {
+    background-color: #fff;
+    &__header {
+        padding: 10px 20px;
+        border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
+    }
+    &__list {
+        cursor: pointer;
+        .author__item {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            .more {
+                width: 100%;
+                color: @active-color;
+                text-align: center;
+            }
+            &:hover {
+                background-color: @hover-gray40-color;
+            }
+            &__avatar {
+                flex: none;
+                width: 45px;
+                height: 45px;
+                margin-right: 5px;
+                border-radius: 50%;
+                background-image: url("https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3ab9156547f7471d8fdcf17632ea55c6~tplv-k3u1fbpfcp-zoom-1.image");
+            }
+            .userinfo {
+                display: flex;
+                flex-direction: column;
+                // align-items: center;
+                color: #909090;
+                font-size: 12px;
+                overflow: hidden;
+                &__name {
+                    .ellipsis();
+                    color: #333;
+                    font-size: 14px;
+                }
+                &__position {
+                    .ellipsis();
+                }
+                &__description {
+                    .ellipsis();
+                }
+            }
+        }
+    }
+}

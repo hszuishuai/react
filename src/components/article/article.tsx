@@ -34,7 +34,7 @@ const Article: any = (props: ArticleProps) => {
         <div className={styles.article} onClick={onClick}>
             <div className={styles.article__body}>
                 <div className={`${styles.article__top} `}>
-                    <div className={`${styles.article__top__item} ${styles.post}`}>专栏</div>
+                    {/* <div className={`${styles.article__top__item} ${styles.post}`}>专栏</div> */}
                     <div className={styles.article__top__item}>{article.author_user_info.user_name}</div>
                     <div className={styles.article__top__item}>{formDate(article.article_info.mtime)}前</div>
                     <div className={styles.article__top__item}>{renderTags(article.tags)}</div>

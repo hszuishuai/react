@@ -2,9 +2,9 @@ import React, { useState, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Tags from "@/components/tags";
 import ArticleView from "@/components/article/article";
-import { Login } from "./modules";
-
+import { Login, Author } from "./modules";
 import { ArticleSkeleton } from "@/components/skeleton";
+
 import { getUrlParams, isArrayEmpty } from "@/lib/utils";
 import useObserve from "@/hooks/useObserve";
 import { ITag, IArticle } from "../../../typing";
@@ -100,6 +100,7 @@ const HomeContainer: React.FC<IHomeContainerProp> = (props) => {
                 </div>
                 <div className={styles.welcome_aside}>
                     <Login />
+                    <Author />
                 </div>
             </div>
         </div>
