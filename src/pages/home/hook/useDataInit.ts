@@ -1,11 +1,11 @@
 import { useEffect, useCallback } from "react";
-import { getArticle, getTags, getCategoryList, IArticleParam } from "@/api";
-import { useFetch } from "../../../hooks";
 import { useParams, useLocation } from "react-router-dom";
+import { useFetch } from "../../../hooks";
 
-import { forMateArticles, getUrlParams } from "@/lib/utils";
+import { forMateArticles, getUrlParams, isArrayEmpty } from "@/lib/utils";
+import { getArticle, getTags, getCategoryList, getAuthorList, IArticleParam } from "@/api";
+import { ICategory, IUserInfo } from "../../../../typing";
 
-import { ICategory } from "../../../../typing";
 // import { categoryList, ICategory } from "@/mock/data";
 export enum SORT_TYPE {
     "popular" = 200,
@@ -17,6 +17,7 @@ function useDataInit(errorCb: (error: string) => void): any {
     const { loadData: loadTagData, data: tagData } = useFetch(getTags, false);
     const { loadData: loadArticleData, data: articleData, loadMoreData } = useFetch(getArticle, false);
     const { loadData: loadCategoryData, data: categoryData } = useFetch<Array<ICategory>>(getCategoryList, false);
+    const { loadData: loadAuthorData, data: authorData } = useFetch<IUserInfo[]>(getAuthorList, false);
     const routerParams: any = useParams();
     const { search } = useLocation();
     //const [articleList, setArticleList] = useState<Array<IArticle>>([]);
@@ -43,7 +44,7 @@ function useDataInit(errorCb: (error: string) => void): any {
     //getUrlParams(search);
     useEffect(() => {
         try {
-            if (categoryData) {
+            if (!isArrayEmpty(categoryData)) {
                 const param: IArticleParam = getParams();
                 loadArticleData(param);
                 param.cate_id && loadTagData(param);
@@ -70,10 +71,12 @@ function useDataInit(errorCb: (error: string) => void): any {
 
     useEffect(() => {
         loadCategoryData([]);
+        loadAuthorData([]);
     }, []);
     return {
         forMateHomeData: {
             articleData: articleData && forMateArticles(articleData),
+            authorData: authorData,
             categoryData: categoryData,
             tagData: tagData,
         },

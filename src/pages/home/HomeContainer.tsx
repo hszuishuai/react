@@ -7,18 +7,19 @@ import { ArticleSkeleton } from "@/components/skeleton";
 
 import { getUrlParams, isArrayEmpty } from "@/lib/utils";
 import useObserve from "@/hooks/useObserve";
-import { ITag, IArticle } from "../../../typing";
+import { ITag, IArticle, IUserInfo } from "../../../typing";
 
 import styles from "./Home.module.less";
 
 export interface IHomeContainerProp {
     tagData?: Array<ITag>;
     articleData?: Array<IArticle>;
+    authorData?: IUserInfo[];
     handlerMore: () => void;
 }
 
 const HomeContainer: React.FC<IHomeContainerProp> = (props) => {
-    const { tagData, articleData, handlerMore } = props;
+    const { tagData, articleData, handlerMore, authorData } = props;
     //tag展开
     const [isUnfold, setUnfold] = useState<Boolean>(false);
 
@@ -100,7 +101,7 @@ const HomeContainer: React.FC<IHomeContainerProp> = (props) => {
                 </div>
                 <div className={styles.welcome_aside}>
                     <Login />
-                    <Author />
+                    {authorData && <Author authorData={authorData} />}
                 </div>
             </div>
         </div>

@@ -2,6 +2,8 @@ import axios from "../lib/axios";
 //import { AxiosResponse } from "axios";
 import { ILoginParams } from "../mobx/user/type";
 import { forRecommendArticle } from "@/lib/utils";
+import { IApiResponse, IUserInfo } from "../../typing";
+
 // const JUEJIN_URL: String = "https://web-api.juejin.im";
 
 // {
@@ -21,8 +23,8 @@ import { forRecommendArticle } from "@/lib/utils";
 // };
 
 //const BASE_URL = "http://localhost:4000"
-interface IFunc<T> {
-    (params: T): Promise<any>;
+interface IFunc<T, P = any> {
+    (params?: T | any): Promise<P | undefined>;
 }
 
 const login: IFunc<ILoginParams> = (params) => {
@@ -84,4 +86,25 @@ const getCategoryList: any = () => {
     return axios.get("/juejinApi/tag_api/v1/query_category_briefs?show_type=0");
 };
 
-export { login, getArticle, getTags, getCategoryList };
+/**
+ *
+ */
+
+const getAuthorList: any = async () => {
+    try {
+        const res: IApiResponse<IUserInfo> = await axios.get("/juejinApi/user_api/v1/author/recommend", {
+            params: {
+                category_id: "",
+                cursor: 0,
+                limit: 20,
+            },
+        });
+        if (res.err_msg === "success") {
+            return res;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export { login, getArticle, getTags, getCategoryList, getAuthorList };

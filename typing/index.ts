@@ -26,6 +26,19 @@ export interface ITag {
     tag_name: String;
 }
 
+/**
+ *  请求回应的接口
+ */
+
+export interface IApiResponse<T> {
+    count?: number;
+    cursor?: string;
+    data?: T[];
+    err_msg?: string;
+    err_no?: number;
+    has_more?: boolean;
+}
+
 export interface IUserInteract {
     id: number;
     is_collect: boolean;
@@ -104,24 +117,25 @@ export interface IArticleInfo {
  * 用户信息接口
  */
 export interface IUserInfo {
-    avatar_large: String;
-    company: String;
-    description: String;
-    digg_article_count: Number;
-    digg_shortmsg_count: Number;
-    favorable_author: Number;
-    followee_count: Number;
-    follower_count: Number;
+    avatar_large: string;
+    company: string;
+    description: string;
+    digg_article_count?: Number;
+    digg_shortmsg_count?: Number;
+    favorable_author?: Number;
+    followee_count?: Number;
+    follower_count?: Number;
     got_digg_count: Number;
     got_view_count: Number;
     isfollowed: Boolean;
-    job_title: String;
+    job_title: string;
     level: Number;
-    post_article_count: Number;
-    post_shortmsg_count: Number;
-    power: Number;
-    user_id: String;
-    user_name: String;
+    post_article_count?: Number;
+    post_shortmsg_count?: Number;
+    power?: Number;
+    user_id: string;
+    user_name: string;
+    author_desc?: string;
 }
 
 export interface ICategory {
