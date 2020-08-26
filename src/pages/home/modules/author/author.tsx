@@ -1,10 +1,15 @@
 import React from "react";
+
 import styles from "./author.module.less";
 import { IUserInfo } from "../../../../../typing";
 
 export interface IAuthorProps {
     authorData: IUserInfo[] | [];
 }
+const forMateAvatarUrl = (url: string) => {
+    const urlStrList: any[] = url.split("?");
+    return urlStrList[0] + "?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1";
+};
 
 const Author: React.FC<any> = ({ authorData }: IAuthorProps) => {
     const renderItem: any = () => {
@@ -12,11 +17,17 @@ const Author: React.FC<any> = ({ authorData }: IAuthorProps) => {
             return (
                 <li className={styles.author__item} key={item.user_id}>
                     <div
-                        style={{ backgroundImage: `url(${item.avatar_large})` }}
+                        style={{ backgroundImage: `url(${forMateAvatarUrl(item.avatar_large)})` }}
                         className={styles.author__item__avatar}
                     ></div>
                     <div className={styles.userinfo}>
-                        <div className={styles.userinfo__name}>{item.user_name}</div>
+                        <div className={styles.userinfo__name}>
+                            <span>{item.user_name}</span>
+                            <img
+                                className={styles.user_level}
+                                src={require(`../../../../assets/svg/lv${item.level}.svg`)}
+                            />
+                        </div>
                         <div className={styles.userinfo__position}>{item.company}</div>
                         <div className={styles.userinfo__description}>{item.description}</div>
                     </div>

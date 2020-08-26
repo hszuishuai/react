@@ -59,6 +59,7 @@
         "@types/jest": "^25.2.3",
         "awesome-typescript-loader": "^5.2.1",
         "http-proxy-middleware": "^1.0.3",
+        "svg-sprite-loader": "^5.0.0",
         "ts-import-plugin": "^1.6.1",
         "ts-jest": "^26.0.0",
         "typescript": "^3.9.6"

@@ -27,6 +27,9 @@
                 height: 45px;
                 margin-right: 5px;
                 border-radius: 50%;
+                background-position: 50%;
+                background-repeat: no-repeat;
+                background-size: cover;
                 //background-image: url("https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3ab9156547f7471d8fdcf17632ea55c6~tplv-k3u1fbpfcp-zoom-1.image");
             }
             .userinfo {
@@ -38,8 +41,13 @@
                 overflow: hidden;
                 &__name {
                     .ellipsis();
+                    display: flex;
+                    align-items: center;
                     color: #333;
                     font-size: 14px;
+                    .user_level {
+                        margin-left: 5px;
+                    }
                 }
                 &__position {
                     .ellipsis();
