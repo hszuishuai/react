@@ -28,7 +28,10 @@ const Author: React.FC<any> = ({ authorData }: IAuthorProps) => {
                                 src={require(`../../../../assets/svg/lv${item.level}.svg`)}
                             />
                         </div>
-                        <div className={styles.userinfo__position}>{item.company}</div>
+                        <div className={styles.userinfo__position}>
+                            {item.job_title}
+                            {item.company && ` @ ${item.company}`}
+                        </div>
                         <div className={styles.userinfo__description}>{item.description}</div>
                     </div>
                 </li>

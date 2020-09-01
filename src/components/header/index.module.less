@@ -1,0 +1,53 @@
+@import url("../../style/global.less");
+.app_header {
+    position: relative;
+    height: 5rem;
+    &_container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        color: #909090;
+        border-bottom: 1px solid #f1f1f1;
+        height: 5rem;
+        background-color: #fff;
+        z-index: 400;
+        .container {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            &_logo {
+                margin-right: 20px;
+            }
+            &_nav {
+                flex: 1 0 auto;
+                display: flex;
+                align-items: center;
+                height: 100%;
+                .nav_list {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    margin: 0;
+                    .nav_item {
+                        font-size: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                        padding: 0 1.5rem;
+                        cursor: pointer;
+                        a {
+                            color: #909090;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .active {
+        color: @active-color !important;
+    }
+}

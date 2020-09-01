@@ -21,7 +21,16 @@ const Navigate: React.SFC<INavProp> = ({ categoryList }) => {
             <nav className={styles.view__nav}>
                 <ul className={styles.nav__list}>
                     <li className={styles.nav__item}>
-                        <NavLink to={"/home/recommend"} activeClassName={styles.active}>
+                        <NavLink
+                            to={"/home/recommend"}
+                            activeClassName={styles.active}
+                            isActive={(_, location) => {
+                                if (location.pathname === "/home" || location.pathname === "/home/recommend") {
+                                    return true;
+                                }
+                                return false;
+                            }}
+                        >
                             推荐
                         </NavLink>
                     </li>

@@ -57,9 +57,10 @@ const HomeContainer: React.FC<IHomeContainerProp> = (props) => {
     // if (loading) {
     //     return <div>正在加载</div>;
     // }
+    console.log(tagData);
     return (
         <div className={styles.home__main}>
-            {tagData && <Tags tags={tagData} isUnfold={isUnfold} setUnfold={handlerUnfold} />}
+            {!isArrayEmpty(tagData) && <Tags tags={tagData} isUnfold={isUnfold} setUnfold={handlerUnfold} />}
             <div className={styles.home__view}>
                 <div className={styles.home__context}>
                     <nav className={styles.category_nav}>

@@ -25,6 +25,13 @@ const routeList: IRouter[] = [
         //children: homeRouter,
     },
     {
+        component: lazy(() => import("../pages/home/Home")),
+        path: "/home",
+        // tslint:disable-next-line: object-literal-sort-keys
+        exact: true,
+        //children: homeRouter,
+    },
+    {
         component: lazy(() => import("../App")),
         path: "/",
         exact: true,
