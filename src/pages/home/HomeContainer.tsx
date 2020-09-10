@@ -28,7 +28,6 @@ const HomeContainer: React.FC<IHomeContainerProp> = (props) => {
         if (entries[0].intersectionRatio <= 0 || entries[0].intersectionRatio === 1) {
             return;
         }
-        console.log("dad", entries[0].intersectionRatio);
         handlerMore();
     });
 

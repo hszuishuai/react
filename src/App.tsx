@@ -33,11 +33,12 @@ const renderDom = ({ renderEmpty }: ConfigConsumerProps): React.ReactNode => {
 //react-Hooks
 const MemoChildren: any = memo(Children);
 
-const App: React.SFC<IState> = (props) => {
+const App: React.SFC<IState> = (props, context) => {
     const [state, setState] = useState<IState>({
         child: undefined,
         msg: "这是信息",
     });
+    console.log(context);
     const [count, setCount] = useState(0);
     const { msg, child } = state;
     const [enable, setToggle] = useToggle(false);
@@ -72,7 +73,7 @@ const App: React.SFC<IState> = (props) => {
             <button onClick={() => loginOut()}>退出</button>
             <button onClick={() => setCount(count + 1)}>点击</button>
             <button onClick={setToggle}>toggle</button>
-            <ConfigConsumer>{renderDom}</ConfigConsumer>
+            {/* {renderDom} */}
             <div className="footer" ref={ref}>
                 footer
             </div>

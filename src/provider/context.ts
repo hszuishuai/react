@@ -3,6 +3,7 @@ import defaultRenderEmpty, { RenderEmptyHandler } from "./renderEmpty";
 
 export interface ConfigConsumerProps {
     renderEmpty: RenderEmptyHandler;
+    isNav?: boolean;
 }
 
 export const ConfigContext = React.createContext<ConfigConsumerProps>({

@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 import styles from "./index.module.less";
 import { ITag } from "@type/index";
 
@@ -15,7 +16,8 @@ const Tags: React.SFC<any> = ({ tags, isUnfold, setUnfold }) => {
                     );
                 })}
                 {!isUnfold && (
-                    <li onClick={setUnfold} className={`${styles.tag_nav_item} ${styles.unfold}`}>
+                    // `${styles.tag_nav_item} ${styles.unfold}`
+                    <li onClick={setUnfold} className={cx(styles.tag_nav_item, styles.unfold)}>
                         展开
                     </li>
                 )}

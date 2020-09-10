@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
+import cx from "classnames";
 import styles from "./index.module.less";
-import { useHistory, withRouter, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { ConfigConsumer } from "@/provider";
+import { ConfigConsumerProps } from "@/provider/context";
 
 // const useScroll = () => {};
-export interface IAppHeaderProp {
-    jump: (path: string) => void;
+export interface IAppHeaderProp extends ConfigConsumerProps {
     children?: React.ReactNode;
 }
 export interface INav {
@@ -19,20 +21,12 @@ const NavList: INav[] = [
     { path: "/book", name: "小册" },
 ];
 
-export const AppHeader: React.SFC<IAppHeaderProp> = ({ jump }) => {
+export const AppHeader: React.SFC<IAppHeaderProp> = ({ isNav }) => {
     const rendNav = () => {
         return NavList.map((nav) => {
             return (
                 <li className={styles.nav_item} key={nav.name}>
-                    <NavLink
-                        activeClassName={styles.active}
-                        // isActive={(match, location) => {
-                        //     // location.url === nav.pat
-                        //     console.log(match, nav.path, location.pathname.includes(nav.path));
-                        //     return location.pathname.includes(nav.path);
-                        // }}
-                        to={nav.path}
-                    >
+                    <NavLink activeClassName={styles.active} to={nav.path}>
                         {nav.name}
                     </NavLink>
                 </li>
@@ -41,7 +35,7 @@ export const AppHeader: React.SFC<IAppHeaderProp> = ({ jump }) => {
     };
     return (
         <div className={styles.app_header}>
-            <header className={styles.app_header_container}>
+            <header className={cx(styles.app_header_container, { [`${styles.top}`]: isNav })}>
                 <div className={styles.container}>
                     <div className={styles.container_logo}>
                         <img src="https://s3.pstatp.com/toutiao/xitu_juejin_web/img/logo.a7995ad.svg" alt="logo" />
@@ -58,13 +52,12 @@ export const AppHeader: React.SFC<IAppHeaderProp> = ({ jump }) => {
 export default function HeaderContainer(): JSX.Element {
     //const history = useHistory();
 
-    // useEffect(() => {
-    //     window.addEventListener("scroll", () => {}, false);
-    //     return window.removeEventListener("scroll", () => {}, false);
-    // }, []);
-
-    const jump = (path: string) => {
-        // history.push(path);
-    };
-    return <AppHeader jump={jump} />;
+    return (
+        <ConfigConsumer>
+            {(context) => {
+                console.log(context);
+                return <AppHeader {...context} />;
+            }}
+        </ConfigConsumer>
+    );
 }

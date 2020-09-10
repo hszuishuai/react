@@ -23,6 +23,7 @@ import "./common/reset.css";
 
 import App from "@/Router/App";
 import * as serviceWorker from "./serviceWorker";
+import Provider from "./provider";
 // configure({ enforceActions: "observed" });
 //import {BrowserRouter as Router ,Route,Link} from 'react-router-dom'
 
@@ -31,7 +32,9 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
     // <Provider {...store}>
-    <App />,
+    <Provider>
+        <App />
+    </Provider>,
     // </Provider>,
     document.getElementById("root")
 );

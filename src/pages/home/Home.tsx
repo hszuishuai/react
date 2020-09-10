@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 //import { useHistory, useLocation } from "react-router-dom";
 // import NavigationBar from "../../component/navigationBar";
+import { ConfigConsumer } from "@/provider";
 import styles from "./Home.module.less";
 //import ArticleView from "@/component/article/article";
 
@@ -99,14 +100,20 @@ function Home(props: Props): JSX.Element {
             })
         );
         loadMoreArticle({ cursor });
-    }, [page]);
+    }, [page, loadMoreArticle]);
     //console.log(ref);
 
     return (
-        <div className={styles.home}>
-            <Nav categoryList={forMateHomeData.categoryData || []} />
-            <HomeContainer {...forMateHomeData} handlerMore={handlerMore} />
-        </div>
+        <ConfigConsumer>
+            {(context) => {
+                return (
+                    <div className={styles.home}>
+                        <Nav isNav={context.isNav} categoryList={forMateHomeData.categoryData || []} />
+                        <HomeContainer {...forMateHomeData} handlerMore={handlerMore} />
+                    </div>
+                );
+            }}
+        </ConfigConsumer>
     );
 }
 

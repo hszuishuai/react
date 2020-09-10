@@ -1,5 +1,5 @@
 import * as React from "react";
-//import classNames from "classnames";
+import cx from "classnames";
 
 //import { categoryList } from "../../mock/data";
 import { ICategory } from "../../../typing";
@@ -10,15 +10,16 @@ import { NavLink } from "react-router-dom";
 
 export interface INavProp {
     categoryList: Array<ICategory>;
+    isNav?: boolean;
 }
 
-const Navigate: React.SFC<INavProp> = ({ categoryList }) => {
+const Navigate: React.SFC<INavProp> = ({ categoryList, isNav }) => {
     // if (!categoryList) {
     //     return null;
     // }
     return (
         <div className={styles.main__header}>
-            <nav className={styles.view__nav}>
+            <nav className={cx(styles.view__nav, { [`${styles.top}`]: isNav })}>
                 <ul className={styles.nav__list}>
                     <li className={styles.nav__item}>
                         <NavLink
